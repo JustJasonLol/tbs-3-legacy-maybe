@@ -1,22 +1,77 @@
 {
-	"songs": [
-		["Satin Panties", "mom", [252, 150, 215]],
-		["High", "mom", [252, 150, 215]],
-		["Milf", "mom", [252, 150, 215]]
+	"storyName": "secret of nobody",
+	"difficulties": "hard",
+	"hideFreeplay": false,
+	"weekBackground": "house",
+	"weekBefore": "tutorial",
+	"freeplayColor": [
+		146,
+		113,
+		253
 	],
-	
-	"weekCharacters": [
-		"mom",
-		"bf",
-		"gf"
-	],
-	"weekBackground": "limo",
-
-	"storyName": "MOMMY MUST MURDER",
-	"weekBefore": "week3",
-	"weekName": "Week 4",
 	"startUnlocked": true,
-
-	"hideStoryMode": false,
-	"hideFreeplay": false
+	"hideStoryMode": true,
+	"songs": [
+		[
+			"reburning",
+			"mouse-p1",
+			[
+				246,
+				160,
+				0
+			]
+		],
+		[
+			"steep-slopes",
+			"mouse-p2",
+			[
+				206,
+				100,
+				0
+			]
+		],
+		[
+			"desire-or-despair",
+			"mouse-p2",
+			[
+				126,
+				0,
+				33
+			]
+		],
+		[
+			"jam",
+			"mouse-p2",
+			[
+				126,
+				0,
+				33
+			]
+		],
+		[
+			"mucho-mouse",
+			"mouse-p2",
+			[
+				126,
+				0,
+				33
+			]
+		],
+		[
+			"meme-mania",
+			"mouse-p2",
+			[
+				126,
+				0,
+				33
+			]
+		]
+	],
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"hiddenUntilUnlocked": false,
+	"weekName": "Custom Week"
 }
