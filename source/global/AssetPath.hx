@@ -1,4 +1,4 @@
-package;
+package global;
 
 import animateatlas.AtlasFrameMaker;
 import flixel.math.FlxPoint;
@@ -25,7 +25,7 @@ import flash.media.Sound;
 
 using StringTools;
 
-class Paths
+class AssetPath
 {
 	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
 	inline public static var VIDEO_EXT = "mp4";

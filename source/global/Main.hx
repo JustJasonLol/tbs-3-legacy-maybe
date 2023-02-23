@@ -1,4 +1,4 @@
-package;
+package global;
 
 import flixel.graphics.FlxGraphic;
 import flixel.FlxG;
@@ -28,15 +28,25 @@ import sys.io.Process;
 
 using StringTools;
 
+typedef _G = {
+	var width:Int;
+	var height:Int;
+	var initialState:Class<FlxState>;
+	@:optional var zoom:Float;
+	var framerate:Int;
+	var skipSplash:Bool;
+	var startFullscreen:Bool;
+} 
+
 class Main extends Sprite
 {
-	var game = {
+	var game:_G = {
 		width: 1280, // WINDOW width
 		height: 720, // WINDOW height
 		initialState: TitleState, // initial game state
 		zoom: -1.0, // game state bounds
-		framerate: 60, // default framerate
-		skipSplash: true, // if the default flixel splash screen should be skipped
+		framerate: 120, // default framerate
+		skipSplash: false, // if the default flixel splash screen should be skipped
 		startFullscreen: false // if the game should start at fullscreen mode
 	};
 
