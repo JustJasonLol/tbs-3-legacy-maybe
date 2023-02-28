@@ -49,6 +49,25 @@ class FreeplayState extends MusicBeatState
 	var bg:FlxSprite;
 	var intendedColor:Int;
 	var colorTween:FlxTween;
+	var curWeekShit:String = "None";
+
+	// arrays for easy stuff and less lines of code -jason
+	private var jerryStuff:Array<Dynamic> = [
+		['House for sale', 'Vanishing', 'Sirokou'],
+		['mouse-p1', 'mouse-p2', 'mouse-p2'],
+		[FlxColor.fromRGB(246, 160, 0), FlxColor.fromRGB(206, 100, 0), FlxColor.fromRGB(126, 0, 33)]
+	];
+
+	private var tomStuff:Array<Dynamic> = [
+		['Blue', 'Tragical comedy', 'Shattered'],
+		['blue-tom', 'blue-tom', 'blue-tom'],
+		[FlxColor.fromRGB(66, 73, 113), FlxColor.fromRGB(46, 53, 93), FlxColor.fromRGB(26, 33, 55)]
+	];
+
+	public function new(week:String = "None") {
+		curWeekShit = week;
+		super();
+	}
 
 	override function create()
 	{
@@ -64,29 +83,41 @@ class FreeplayState extends MusicBeatState
 		DiscordClient.changePresence("In the Menus", null);
 		#end
 
-		for (i in 0...WeekData.weeksList.length) {
-			if(weekIsLocked(WeekData.weeksList[i])) continue;
+		switch(curWeekShit)
+		{
+			case 'Jerry':
+				for(i in 0...3)
+					addSong(jerryStuff[0][i], 1, jerryStuff[1][i], jerryStuff[2][i]);
 
-			var leWeek:WeekData = WeekData.weeksLoaded.get(WeekData.weeksList[i]);
-			var leSongs:Array<String> = [];
-			var leChars:Array<String> = [];
+			case 'Tom':
+				for(i in 0...3)
+					addSong(tomStuff[0][i], 1, tomStuff[1][i], tomStuff[2][i]);
 
-			for (j in 0...leWeek.songs.length)
-			{
-				leSongs.push(leWeek.songs[j][0]);
-				leChars.push(leWeek.songs[j][1]);
-			}
-
-			WeekData.setDirectoryFromWeek(leWeek);
-			for (song in leWeek.songs)
-			{
-				var colors:Array<Int> = song[2];
-				if(colors == null || colors.length < 3)
-				{
-					colors = [146, 113, 253];
+			default:
+				for (i in 0...WeekData.weeksList.length) {
+					if(weekIsLocked(WeekData.weeksList[i])) continue;
+		
+					var leWeek:WeekData = WeekData.weeksLoaded.get(WeekData.weeksList[i]);
+					var leSongs:Array<String> = [];
+					var leChars:Array<String> = [];
+		
+					for (j in 0...leWeek.songs.length)
+					{
+						leSongs.push(leWeek.songs[j][0]);
+						leChars.push(leWeek.songs[j][1]);
+					}
+		
+					WeekData.setDirectoryFromWeek(leWeek);
+					for (song in leWeek.songs)
+					{
+						var colors:Array<Int> = song[2];
+						if(colors == null || colors.length < 3)
+						{
+							colors = [146, 113, 253];
+						}
+						addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]));
+					}
 				}
-				addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]));
-			}
 		}
 		WeekData.loadTheFirstEnabledMod();
 
@@ -318,17 +349,10 @@ class FreeplayState extends MusicBeatState
 				colorTween.cancel();
 			}
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new MainMenuState());
+			MusicBeatState.switchState(new FreeplayCategory());
 		}
 
-		if(ctrl)
-		{
-			persistentUpdate = false;
-			openSubState(new GameplayChangersSubstate());
-		}
-		else if(space)
-		{
-			if(instPlaying != curSelected)
+		if(instPlaying != curSelected)
 			{
 				#if PRELOAD_ALL
 				destroyFreeplayVocals();
@@ -336,20 +360,15 @@ class FreeplayState extends MusicBeatState
 				Paths.currentModDirectory = songs[curSelected].folder;
 				var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
 				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
-				if (PlayState.SONG.needsVoices)
-					vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
-				else
-					vocals = new FlxSound();
-
-				FlxG.sound.list.add(vocals);
 				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0.7);
-				vocals.play();
-				vocals.persist = true;
-				vocals.looped = true;
-				vocals.volume = 0.7;
 				instPlaying = curSelected;
 				#end
-			}
+		}
+		
+		if(ctrl)
+		{
+			persistentUpdate = false;
+			openSubState(new GameplayChangersSubstate());
 		}
 
 		else if (accepted)
@@ -471,12 +490,12 @@ class FreeplayState extends MusicBeatState
 			bullShit++;
 
 			item.alpha = 0.6;
-			// item.setGraphicSize(Std.int(item.width * 0.8));
+			item.setGraphicSize(Std.int(item.width * 0.8));
 
 			if (item.targetY == 0)
 			{
 				item.alpha = 1;
-				// item.setGraphicSize(Std.int(item.width));
+				item.setGraphicSize(Std.int(item.width));
 			}
 		}
 		

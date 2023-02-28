@@ -1,5 +1,7 @@
 package global;
 
+import flixel.FlxCamera;
+import flixel.FlxBasic;
 import flixel.graphics.FlxGraphic;
 import flixel.FlxG;
 import flixel.FlxGame;
@@ -110,10 +112,12 @@ class Main extends Sprite
 		}
 		#end
 
-		#if html5
-		FlxG.autoPause = false;
-		FlxG.mouse.visible = false;
-		#end
+		if (Type.getClass(FlxG.state) == PlayState)
+			FlxG.autoPause = true;
+		else
+			FlxG.autoPause = false;
+
+		FlxG.mouse.visible = true;
 		
 		#if CRASH_HANDLER
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
@@ -170,4 +174,43 @@ class Main extends Sprite
 		Sys.exit(1);
 	}
 	#end
+
+	/**
+	 * Checks to see if some FlxObject overlaps this FlxObject or FlxGroup. 
+	 * 
+	 * If the group has a LOT of things in it, it might be faster to use FlxG.overlaps(). 
+	 * 
+	 * **WARNING: Currently tilemaps do NOT support screen space overlap checks!**
+	 * 
+	 * ### Example of his use
+	 * ```haxe
+	 * 	// Checks if the cursor is overlapping at myCoolObject at the last camera on the list
+	 * 	if (Main.mouseOverlaps(myCoolObject, FlxG.mouse.getPositionInCameraView(FlxG.cameras.list[FlxG.cameras.list.length - 1])))
+	 * 	{
+	 * 		myCoolObject.alpha = 0.5; // Sets the myCoolObject alpha to 0.5
+	 * 
+	 * 		if (FlxG.mouse.justPressed) // Checks if the mouse is pressed while overlapping myCoolObject
+	 * 		{
+	 * 			FlxG.switchState(new MyCoolState()); // Switches to another class/state
+	 * 		}
+	 * 	}
+	 * 
+	 * ```
+	 * 
+	 * @param ObjectOrGroup The object or group being tested.
+	 * @param Camera Specify which game camera you want. If null getScreenPosition() will just grab the first global camera.
+	 */
+	public static function mouseOverlaps(spr:Dynamic, mousePos:flixel.math.FlxPoint):Bool
+		{
+			if (mousePos.x >= (spr.x - spr.offset.x)
+				&& mousePos.x < (spr.x - spr.offset.x + spr.width)
+				&& mousePos.y >= (spr.y - spr.offset.y)
+				&& mousePos.y < (spr.y - spr.offset.y + spr.height))
+			{
+				return true;
+			}
+			
+			//sad
+			return false;
+		}
 }

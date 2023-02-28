@@ -72,7 +72,13 @@ import sys.io.File;
 #end
 
 #if VIDEOS_ALLOWED
+#if(hxCodec >= "2.6.1")
+import hxcodec.VideoHandler;
+#elseif (hxCodec == "2.6.0")
+import VideoHandler;
+#else
 import vlc.MP4Handler;
+#end
 #end
 
 using StringTools;
@@ -1558,7 +1564,7 @@ class PlayState extends MusicBeatState
 		#if VIDEOS_ALLOWED
 		inCutscene = true;
 
-		var filepath:String = Paths.video(name);
+		var filepath:String = Paths.video(name #if (hxCodec >= "2.6.0") + '.mp4' #end);
 		#if sys
 		if(!FileSystem.exists(filepath))
 		#else
@@ -1570,7 +1576,11 @@ class PlayState extends MusicBeatState
 			return;
 		}
 
+		#if(hxCodec >= "2.6.0")
+		var video:VideoHandler = new VideoHandler();
+		#else
 		var video:MP4Handler = new MP4Handler();
+		#end
 		video.playVideo(filepath);
 		video.finishCallback = function()
 		{

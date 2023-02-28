@@ -345,7 +345,7 @@ class FreeplayCategory extends MusicBeatState
                LoadingState.loadAndSwitchState(new FreeplayState('Pibby'));
                trace('Category: Goofy ahh pibby shit week');
 				case 3:
-					LoadingState.loadAndSwitchState(new FreeplayState('Extras'));
+					LoadingState.loadAndSwitchState(new freeplay.ExtrasState());
                trace('Category: Massive extras');
 				case 4:
 					LoadingState.loadAndSwitchState(new FreeplayState('Covers'));

@@ -342,7 +342,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		boyfriend.updateHitbox();
 		boyfriend.dance();
 		insert(1, boyfriend);
-		boyfriend.visible = wasVisible;
+		boyfriend.visible = false;
 	}
 
 	function reloadCheckboxes() {
