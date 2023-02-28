@@ -11,10 +11,7 @@ import flixel.FlxG;
 import Discord.DiscordClient;
 #end
 
-/**
- * messy code is for good
- */
-class ExtrasState extends MusicBeatState
+class MainState extends MusicBeatState
 {
 	var CanSelect:Bool;
 
