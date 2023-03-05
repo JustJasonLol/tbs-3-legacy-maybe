@@ -2,19 +2,19 @@
 	"animations": [
 		{
 			"offsets": [
-				-1,
-				-8
+				0,
+				-18
 			],
 			"loop": false,
 			"anim": "cheer",
 			"fps": 24,
-			"name": "Happy",
+			"name": "GF Cheer",
 			"indices": []
 		},
 		{
 			"offsets": [
 				0,
-				-19
+				-27
 			],
 			"loop": false,
 			"anim": "singLEFT",
@@ -25,7 +25,7 @@
 		{
 			"offsets": [
 				0,
-				-20
+				-42
 			],
 			"loop": false,
 			"anim": "singDOWN",
@@ -36,7 +36,7 @@
 		{
 			"offsets": [
 				0,
-				2
+				-14
 			],
 			"loop": false,
 			"anim": "singUP",
@@ -47,7 +47,7 @@
 		{
 			"offsets": [
 				0,
-				-20
+				-15
 			],
 			"loop": false,
 			"anim": "singRIGHT",
@@ -58,12 +58,12 @@
 		{
 			"offsets": [
 				-2,
-				-9
+				-43
 			],
 			"loop": false,
 			"anim": "sad",
 			"fps": 24,
-			"name": "GF sad",
+			"name": "gf sad",
 			"indices": [
 				0,
 				1,
@@ -88,7 +88,7 @@
 			"loop": false,
 			"anim": "danceLeft",
 			"fps": 24,
-			"name": "Idle",
+			"name": "GF Dancing Beat",
 			"indices": [
 				30,
 				0,
@@ -116,7 +116,7 @@
 			"loop": false,
 			"anim": "danceRight",
 			"fps": 24,
-			"name": "Idle",
+			"name": "GF Dancing Beat",
 			"indices": [
 				15,
 				16,
@@ -137,8 +137,8 @@
 		},
 		{
 			"offsets": [
-				45,
-				-8
+				0,
+				-15
 			],
 			"loop": true,
 			"anim": "hairBlow",
@@ -178,27 +178,27 @@
 		{
 			"offsets": [
 				-2,
-				-9
+				-22
 			],
 			"loop": true,
 			"anim": "scared",
 			"fps": 24,
-			"name": "GF scared",
+			"name": "GF FEAR",
 			"indices": []
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/gf-alt",
+	"image": "characters/Dgf",
 	"position": [
 		0,
 		0
 	],
-	"healthicon": "gf",
+	"healthicon": "Dgf",
 	"flip_x": false,
 	"healthbar_colors": [
-		165,
-		0,
-		77
+		249,
+		120,
+		95
 	],
 	"camera_position": [
 		0,

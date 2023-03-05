@@ -336,13 +336,13 @@ class FreeplayCategory extends MusicBeatState
 			switch(curSelected)
          {
             case 0:
-               LoadingState.loadAndSwitchState(new FreeplayState('Jerry'));
+               LoadingState.loadAndSwitchState(new freeplay.main.Jerry());
                trace('Category: Jerry week');
             case 1:
-               LoadingState.loadAndSwitchState(new FreeplayState('Tom'));
+               LoadingState.loadAndSwitchState(new freeplay.main.Tom());
                trace('Category: Tom week');
             case 2:
-               LoadingState.loadAndSwitchState(new FreeplayState('Pibby'));
+               LoadingState.loadAndSwitchState(new freeplay.main.WhyDidYallAddPibbyGoddamn());
                trace('Category: Goofy ahh pibby shit week');
 				case 3:
 					LoadingState.loadAndSwitchState(new freeplay.ExtrasState());

@@ -13,8 +13,8 @@
 		},
 		{
 			"offsets": [
-				-15,
-				45
+				-11,
+				32
 			],
 			"loop": false,
 			"fps": 24,
@@ -25,7 +25,7 @@
 		{
 			"offsets": [
 				-5,
-				43
+				33
 			],
 			"loop": false,
 			"fps": 24,
@@ -35,8 +35,8 @@
 		},
 		{
 			"offsets": [
-				-69,
-				81
+				-39,
+				61
 			],
 			"loop": false,
 			"fps": 24,
@@ -46,8 +46,8 @@
 		},
 		{
 			"offsets": [
-				-2,
-				88
+				-4,
+				64
 			],
 			"loop": false,
 			"fps": 24,
@@ -57,8 +57,8 @@
 		},
 		{
 			"offsets": [
-				-13,
-				39
+				-12,
+				32
 			],
 			"loop": false,
 			"fps": 24,
@@ -69,7 +69,7 @@
 		{
 			"offsets": [
 				-5,
-				43
+				33
 			],
 			"loop": false,
 			"fps": 24,
@@ -79,8 +79,8 @@
 		},
 		{
 			"offsets": [
-				-56,
-				77
+				-46,
+				62
 			],
 			"loop": false,
 			"fps": 24,
@@ -91,7 +91,7 @@
 		{
 			"offsets": [
 				-3,
-				89
+				64
 			],
 			"loop": false,
 			"fps": 24,
@@ -102,7 +102,7 @@
 		{
 			"offsets": [
 				-3,
-				21
+				11
 			],
 			"loop": false,
 			"fps": 24,
@@ -113,7 +113,7 @@
 		{
 			"offsets": [
 				-3,
-				21
+				11
 			],
 			"loop": true,
 			"fps": 24,
@@ -124,7 +124,7 @@
 		{
 			"offsets": [
 				-3,
-				21
+				11
 			],
 			"loop": false,
 			"fps": 24,
@@ -135,7 +135,7 @@
 		{
 			"offsets": [
 				10,
-				34
+				24
 			],
 			"loop": false,
 			"fps": 24,
@@ -150,7 +150,7 @@
 		-160,
 		230
 	],
-	"healthicon": "bf",
+	"healthicon": "bf-blue",
 	"flip_x": true,
 	"healthbar_colors": [
 		49,
@@ -162,5 +162,5 @@
 		0
 	],
 	"sing_duration": 4,
-	"scale": 0.8
+	"scale": 0.6
 }

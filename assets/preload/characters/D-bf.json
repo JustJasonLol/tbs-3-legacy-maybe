@@ -13,8 +13,8 @@
 		},
 		{
 			"offsets": [
-				-15,
-				45
+				-32,
+				6
 			],
 			"loop": false,
 			"fps": 24,
@@ -24,8 +24,8 @@
 		},
 		{
 			"offsets": [
-				-5,
-				43
+				-52,
+				-34
 			],
 			"loop": false,
 			"fps": 24,
@@ -35,8 +35,8 @@
 		},
 		{
 			"offsets": [
-				-69,
-				81
+				-72,
+				40
 			],
 			"loop": false,
 			"fps": 24,
@@ -46,8 +46,8 @@
 		},
 		{
 			"offsets": [
-				-2,
-				88
+				-22,
+				-3
 			],
 			"loop": false,
 			"fps": 24,
@@ -57,8 +57,8 @@
 		},
 		{
 			"offsets": [
-				-13,
-				39
+				-22,
+				8
 			],
 			"loop": false,
 			"fps": 24,
@@ -68,8 +68,8 @@
 		},
 		{
 			"offsets": [
-				-5,
-				43
+				-57,
+				-41
 			],
 			"loop": false,
 			"fps": 24,
@@ -79,8 +79,8 @@
 		},
 		{
 			"offsets": [
-				-56,
-				77
+				-72,
+				42
 			],
 			"loop": false,
 			"fps": 24,
@@ -90,8 +90,8 @@
 		},
 		{
 			"offsets": [
-				-3,
-				89
+				-18,
+				5
 			],
 			"loop": false,
 			"fps": 24,
@@ -101,8 +101,30 @@
 		},
 		{
 			"offsets": [
-				-3,
+				-77,
 				21
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "hey",
+			"indices": [],
+			"name": "BF HEY"
+		},
+		{
+			"offsets": [
+				-3,
+				1
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "scared",
+			"indices": [],
+			"name": "BF idle shaking"
+		},
+		{
+			"offsets": [
+				-13,
+				-20
 			],
 			"loop": false,
 			"fps": 24,
@@ -112,55 +134,88 @@
 		},
 		{
 			"offsets": [
-				-3,
-				21
+				-12,
+				-20
 			],
 			"loop": true,
 			"fps": 24,
 			"anim": "deathLoop",
 			"indices": [],
-			"name": "BF die loop"
+			"name": "BF Dead Loop"
 		},
 		{
 			"offsets": [
-				-3,
-				21
+				-12,
+				46
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "deathConfirm",
 			"indices": [],
-			"name": "BF retry confirm"
+			"name": "BF Dead confirm"
 		},
 		{
-			"offsets": [
-				10,
-				34
-			],
 			"loop": false,
+			"offsets": [
+				-90,
+				-10
+			],
+			"anim": "Dodge down",
 			"fps": 24,
-			"anim": "dodge",
-			"indices": [],
-			"name": "boyfriend dodge"
+			"name": "BF NOTE DOWN DODGE",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-20,
+				-30
+			],
+			"anim": "Dodge left",
+			"fps": 24,
+			"name": "BF NOTE LEFT DODGE",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-67,
+				28
+			],
+			"anim": "Dodge up",
+			"fps": 24,
+			"name": "BF NOTE UP DODGE",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-47,
+				-22
+			],
+			"anim": "Dodge right",
+			"fps": 24,
+			"name": "BF NOTE RIGHT DODGE",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/bf-alt",
+	"image": "characters/Dbf",
 	"position": [
-		-160,
-		230
+		0,
+		350
 	],
-	"healthicon": "bf",
+	"healthicon": "Dbf",
 	"flip_x": true,
 	"healthbar_colors": [
-		49,
-		176,
-		209
+		228,
+		85,
+		216
 	],
 	"camera_position": [
 		0,
 		0
 	],
 	"sing_duration": 4,
-	"scale": 0.8
+	"scale": 1
 }

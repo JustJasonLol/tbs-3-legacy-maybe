@@ -259,7 +259,17 @@ class PauseSubState extends MusicBeatSubstate
 					if(PlayState.isStoryMode) {
 						MusicBeatState.switchState(new StoryMenuState());
 					} else {
-						MusicBeatState.switchState(new FreeplayState());
+						switch(PlayState.SONG.song.toLowerCase())
+						{
+							case 'house-for-sale' | 'vanishing' | 'sirokou': 
+								MusicBeatState.switchState(new freeplay.main.Jerry());
+							case 'blue' | 'tragical-comedy' | 'shattered':
+								MusicBeatState.switchState(new freeplay.main.Tom());
+							case 'funny-cartoon' | 'cat-chase' | 'unstoppable-block':
+								MusicBeatState.switchState(new freeplay.main.WhyDidYallAddPibbyGoddamn());
+							default: // ain't gonna do a case for the tons of extras
+								MusicBeatState.switchState(new freeplay.ExtrasState());
+						}
 					}
 					PlayState.cancelMusicFadeTween();
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));

@@ -1,5 +1,6 @@
 package;
 
+import freeplay.main.Tom;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSubState;
@@ -100,9 +101,13 @@ class GameOverSubstate extends MusicBeatSubstate
 			else
 				switch(PlayState.SONG.song.toLowerCase())
 				{
-					case 'house-for-sale' | 'vanishing' | 'sirokou' | 'blue' | 'tragical-comedy' | 'shattered' | 'funny-cartoon' | 'cat chase' | 'unstopable block':
-						MusicBeatState.switchState(new freeplay.MainState());
-					default:
+					case 'house-for-sale' | 'vanishing' | 'sirokou': 
+						MusicBeatState.switchState(new freeplay.main.Jerry());
+					case 'blue' | 'tragical-comedy' | 'shattered':
+						MusicBeatState.switchState(new Tom());
+					case 'funny-cartoon' | 'cat-chase' | 'unstoppable-block':
+						MusicBeatState.switchState(new freeplay.main.WhyDidYallAddPibbyGoddamn());
+					default: // ain't gonna do a case for the tons of extras
 						MusicBeatState.switchState(new freeplay.ExtrasState());
 				}
 
