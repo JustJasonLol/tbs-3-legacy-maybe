@@ -68,7 +68,7 @@ class WhyDidYallAddPibbyGoddamn extends MusicBeatState
 		add(arrow2);
 
 		image = new FlxSprite(841, 257).loadGraphic(Paths.image('freeplay/pictures/pibby-tom'));
-		image.visible = false;
+		image.visible = true;
 		add(image);
 
 		image1 = new FlxSprite(841, 257).loadGraphicFromSprite(image);
@@ -80,7 +80,7 @@ class WhyDidYallAddPibbyGoddamn extends MusicBeatState
 		add(image2);
 
 		song = new FlxSprite(150, 340).loadGraphic(Paths.image('freeplay/songs/funny-cartoon'));
-		song.visible = false;
+		song.visible = true;
 		add(song);
 
 		song1 = new FlxSprite(150, 340).loadGraphic(Paths.image('freeplay/songs/cat-chase'));
@@ -151,10 +151,10 @@ class WhyDidYallAddPibbyGoddamn extends MusicBeatState
 				selectedString = "unstoppable-block";
 		}
 
-		if(ProductSelected >= 4)
-			ProductSelected = 1;
-		else if(ProductSelected < 0)
+      if(ProductSelected >= 3)
 			ProductSelected = 3;
+		else if(ProductSelected < 1)
+			ProductSelected = 1;
 	}
 
 	function setBeforeStarting():Void {

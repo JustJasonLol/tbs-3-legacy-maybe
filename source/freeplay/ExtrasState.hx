@@ -87,7 +87,7 @@ class ExtrasState extends MusicBeatState
 		add(arrow2);
 
 		image = new FlxSprite(841, 257).loadGraphic(Paths.image('freeplay/pictures/come-for-revenge'));
-		image.visible = false;
+		image.visible = true;
 		add(image);
 
 		image1 = new FlxSprite(841, 257).loadGraphic(Paths.image('freeplay/pictures/come-for-revenge'));
@@ -110,7 +110,11 @@ class ExtrasState extends MusicBeatState
 		image5.visible = false;
 		add(image5);
 
-		image6 = new FlxSprite(841, 257).loadGraphic(Paths.image('freeplay/pictures/meme-mania'));
+		image6 = new FlxSprite(841, 257);
+		image6.frames = Paths.getSparrowAtlas('freeplay/pictures/meme_mouse/meme_mouse_${FlxG.random.int(1, 3)}');
+		image6.animation.addByPrefix('idle', 'idle', 65);
+		image6.setGraphicSize(Std.int(image6.width * 1.5));
+		image6.animation.play('idle');
 		image6.visible = false;
 		add(image6);
 
@@ -131,7 +135,7 @@ class ExtrasState extends MusicBeatState
 		add(image10);
 
 		song = new FlxSprite(150, 340).loadGraphic(Paths.image('freeplay/songs/come-for-revenge'));
-		song.visible = false;
+		song.visible = true;
 		add(song);
 
 		song1 = new FlxSprite(150, 340).loadGraphic(Paths.image('freeplay/songs/reburning'));
@@ -202,7 +206,9 @@ class ExtrasState extends MusicBeatState
 
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.7);
 
-		trace(selectedString);
+		image6.frames = Paths.getSparrowAtlas('freeplay/pictures/meme_mouse/meme_mouse_${FlxG.random.int(1, 5)}');
+		image6.animation.addByPrefix('idle', 'idle', 65);
+		image6.animation.play('idle');
 
 		switch(ProductSelected)
 		{
@@ -260,7 +266,7 @@ class ExtrasState extends MusicBeatState
 				song4.visible = false;
 				song5.visible = true;
 				song6.visible = false;
-				selectedString = "soul-change";
+				selectedString = "soul-chance";
 
 			case 7:
 				image5.visible = false;
@@ -316,9 +322,9 @@ class ExtrasState extends MusicBeatState
 		}
 
 		if(ProductSelected >= 11)
-			ProductSelected = 1;
-		else if(ProductSelected < 1)
 			ProductSelected = 11;
+		else if(ProductSelected < 1)
+			ProductSelected = 1;
 	}
 
 	function setBeforeStarting():Void {
@@ -336,7 +342,9 @@ class ExtrasState extends MusicBeatState
 
 	function startSong()
 		{
+			FlxTween.tween(FlxG.sound.music, {pitch: 0.01}, 1.5);
 			FlxTween.tween(FlxG.camera, {alpha: 0}, 3, {ease: FlxEase.expoOut});
+			FlxTween.tween(FlxG.camera, {zoom: 3}, 2.7, {ease: FlxEase.cubeInOut});
 			new flixel.util.FlxTimer().start(2.5, function(e)
 				{
 					FlxG.sound.music.volume = 0;

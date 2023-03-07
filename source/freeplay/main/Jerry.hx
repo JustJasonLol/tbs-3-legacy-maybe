@@ -68,7 +68,7 @@ class Jerry extends MusicBeatState
 		add(arrow2);
 
 		image = new FlxSprite(841, 257).loadGraphic(Paths.image('freeplay/pictures/hfs'));
-		image.visible = false;
+		image.visible = true;
 		add(image);
 
 		image1 = new FlxSprite(841, 257).loadGraphic(Paths.image('freeplay/pictures/vanishing'));
@@ -80,7 +80,7 @@ class Jerry extends MusicBeatState
 		add(image2);
 
 		song = new FlxSprite(150, 340).loadGraphic(Paths.image('freeplay/songs/HFS'));
-		song.visible = false;
+		song.visible = true;
 		add(song);
 
 		song1 = new FlxSprite(150, 340).loadGraphic(Paths.image('freeplay/songs/vanishing'));
@@ -151,10 +151,10 @@ class Jerry extends MusicBeatState
 				selectedString = "sirokou";
 		}
 
-		if(ProductSelected >= 4)
-			ProductSelected = 1;
-		else if(ProductSelected < 0)
+		if(ProductSelected >= 3)
 			ProductSelected = 3;
+		else if(ProductSelected < 1)
+			ProductSelected = 1;
 	}
 
 	function setBeforeStarting():Void {
