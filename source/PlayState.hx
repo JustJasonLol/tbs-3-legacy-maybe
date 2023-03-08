@@ -270,6 +270,8 @@ class PlayState extends MusicBeatState
 	var tankmanRun:FlxTypedGroup<TankmenBG>;
 	var foregroundSprites:FlxTypedGroup<BGSprite>;
 
+	var invisibleBars:FlxSprite;
+
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
@@ -539,8 +541,6 @@ class PlayState extends MusicBeatState
 					stageCurtains.updateHitbox();
 					add(stageCurtains);
 				}
-				dadbattleSmokes = new FlxSpriteGroup(); //troll'd
-
 			case 'spooky': //Week 2
 				if(!ClientPrefs.lowQuality) {
 					halloweenBG = new BGSprite('halloween_bg', -200, -100, ['halloweem bg0', 'halloweem bg lightning strike']);
@@ -837,6 +837,17 @@ class PlayState extends MusicBeatState
 				if(!ClientPrefs.lowQuality) foregroundSprites.add(new BGSprite('tank4', 1300, 900, 1.5, 1.5, ['fg']));
 				foregroundSprites.add(new BGSprite('tank5', 1620, 700, 1.5, 1.5, ['fg']));
 				if(!ClientPrefs.lowQuality) foregroundSprites.add(new BGSprite('tank3', 1300, 1200, 3.5, 2.5, ['fg']));
+
+			case 'computer':
+				var bg:BGSprite = new BGSprite('BG', -600, 30);
+				add(bg);
+
+				var peakComputer:BGSprite = new BGSprite('computer', -600, 30);
+				add(peakComputer);
+
+				invisibleBars = new FlxSprite(840, 405).makeGraphic(220, 150, FlxColor.BLACK);
+				invisibleBars.alpha = 0.001;
+				add(invisibleBars);
 		}
 
 		switch(Paths.formatToSongPath(SONG.song))
@@ -844,6 +855,8 @@ class PlayState extends MusicBeatState
 			case 'stress':
 				GameOverSubstate.characterName = 'bf-holding-gf-dead';
 		}
+
+		dadbattleSmokes = new FlxSpriteGroup(); //troll'd
 
 		if(isPixelStage) {
 			introSoundsSuffix = '-pixel';
@@ -1347,6 +1360,11 @@ class PlayState extends MusicBeatState
 			}
 		}
 		Paths.clearUnusedMemory();
+
+		for(i in  0...unspawnNotes.length-1) {
+			if(unspawnNotes[i].isSustainNote)
+				unspawnNotes[i].noAnimation = true;
+		}
 		
 		CustomFadeTransition.nextCamera = camOther;
 		if(eventNotes.length < 1) checkEventNote();
@@ -2831,6 +2849,25 @@ class PlayState extends MusicBeatState
 		}*/
 		callOnLuas('onUpdate', [elapsed]);
 
+		if(SONG.song.toLowerCase() == "hydrophobia")
+			{
+				FlxTween.shake(iconP2, 0.005, 1);
+			}
+
+		// coolest easter egg in fnf
+		if(SONG.song.toLowerCase().replace('-', ' ') == "steep slopes")
+			{
+				boyfriend.x = FlxG.mouse.x - 465;
+				boyfriend.y = FlxG.mouse.y - 200;
+				FlxG.mouse.visible = false;
+
+				// loads the funny page
+				if(FlxG.mouse.overlaps(invisibleBars) && FlxG.mouse.justPressed)
+					{
+						FlxG.openURL('https://www.ebay.com/itm/234056755363');
+					}
+			}
+
 		switch (curStage)
 		{
 			case 'tank':
@@ -3994,7 +4031,17 @@ class PlayState extends MusicBeatState
 				if(FlxTransitionableState.skipNextTransIn) {
 					CustomFadeTransition.nextCamera = null;
 				}
-				MusicBeatState.switchState(new FreeplayState());
+				switch(PlayState.SONG.song.toLowerCase())
+						{
+							case 'house-for-sale' | 'vanishing' | 'sirokou': 
+								MusicBeatState.switchState(new freeplay.main.Jerry());
+							case 'blue' | 'tragical-comedy' | 'shattered':
+								MusicBeatState.switchState(new freeplay.main.Tom());
+							case 'funny-cartoon' | 'cat-chase' | 'unstoppable-block':
+								MusicBeatState.switchState(new freeplay.main.WhyDidYallAddPibbyGoddamn());
+							default: // ain't gonna do a case for the tons of extras
+								MusicBeatState.switchState(new freeplay.ExtrasState());
+						}
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				changedDifficulty = false;
 			}
@@ -4599,6 +4646,11 @@ class PlayState extends MusicBeatState
 			notes.remove(note, true);
 			note.destroy();
 		}
+
+		if(note.isSustainNote)
+			{
+				dad.holdTimer = 0;
+			}
 	}
 
 	function goodNoteHit(note:Note):Void
@@ -4638,6 +4690,11 @@ class PlayState extends MusicBeatState
 				}
 				return;
 			}
+
+			if(note.isSustainNote)
+				{
+					boyfriend.holdTimer = 0;
+				}
 
 			if (!note.isSustainNote)
 			{

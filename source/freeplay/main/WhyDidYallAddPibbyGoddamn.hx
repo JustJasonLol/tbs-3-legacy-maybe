@@ -174,6 +174,7 @@ class WhyDidYallAddPibbyGoddamn extends MusicBeatState
 		{
 			FlxTween.tween(FlxG.sound.music, {pitch: 0.01}, 1.5);
 			FlxTween.tween(FlxG.camera, {alpha: 0}, 3, {ease: FlxEase.expoOut});
+			FlxTween.tween(FlxG.camera, {zoom: 3}, 2.7, {ease: FlxEase.cubeInOut});
 			new flixel.util.FlxTimer().start(2.5, function(e)
 				{
 					FlxG.sound.music.volume = 0;
