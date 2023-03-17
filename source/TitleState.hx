@@ -118,7 +118,7 @@ class TitleState extends MusicBeatState
 		bloom0_0 = new FlxRuntimeShader(File.getContent('./mods/shaders/bloom.frag'), null, 140);
 
 		if(ClientPrefs.shaders) {
-		FlxG.camera.setFilters([new ShaderFilter(monitor), new ShaderFilter(bloom0_0)]);
+			FlxG.camera.setFilters([new ShaderFilter(monitor), new ShaderFilter(bloom0_0)]);		
 		}
 		#end
 
@@ -127,6 +127,7 @@ class TitleState extends MusicBeatState
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 
 		Conductor.changeBPM(51);
+
 
 		// DEBUG BULLSHIT
 

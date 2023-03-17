@@ -111,7 +111,7 @@ class ExtrasState extends MusicBeatState
 		add(image5);
 
 		image6 = new FlxSprite(841, 257);
-		image6.frames = Paths.getSparrowAtlas('freeplay/pictures/meme_mouse/meme_mouse_${FlxG.random.int(1, 3)}');
+		image6.frames = Paths.getSparrowAtlas('freeplay/pictures/meme_mouse/meme_mouse_${FlxG.random.int(1, 5)}');
 		image6.animation.addByPrefix('idle', 'idle', 65);
 		image6.setGraphicSize(Std.int(image6.width * 1.5));
 		image6.animation.play('idle');
