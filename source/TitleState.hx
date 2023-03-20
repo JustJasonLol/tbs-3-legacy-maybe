@@ -202,6 +202,15 @@ class TitleState extends MusicBeatState
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
 		}
 
+		Data.load();
+
+		@:privateAccess
+			if(FlxG.save.data.week1Lock == null || Data.week1Lock == null)
+				{
+					Data.lock();
+					trace(FlxG.save.data);
+				}
+
 		FlxG.autoPause = false;
 		#if FREEPLAY
 		MusicBeatState.switchState(new FreeplayState());

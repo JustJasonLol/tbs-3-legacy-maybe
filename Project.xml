@@ -3,8 +3,10 @@
 	<!-- _________________________ Application Settings _________________________ -->
 
 	<app title="Friday Night Funkin': The Basement Show" file="Basement" />
+
 	<app packageName="com.basementteam.basementshow" package="com.basementteam.basementshow" />
-	<app main="global.Main" version="3.0" company="BasementTeam" />
+
+	<app main="global.Main" version="3.0.0" company="BasementTeam" />
 
 	<!--Switch Export with Unique ApplicationID and Icon-->
 	<set name="APP_ID" value="0x0100f6c013bbc000" />

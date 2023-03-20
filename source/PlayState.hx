@@ -189,6 +189,7 @@ class PlayState extends MusicBeatState
 
 	private var healthBarBG:AttachedSprite;
 	public var healthBar:FlxBar;
+	public var actualBar:FlxSprite;
 	var songPercent:Float = 0;
 
 	private var timeBarBG:AttachedSprite;
@@ -1138,6 +1139,13 @@ class PlayState extends MusicBeatState
 		add(healthBar);
 		healthBarBG.sprTracker = healthBar;
 
+		actualBar = new FlxSprite(healthBarBG.x, ClientPrefs.downScroll ? healthBarBG.y = 0.11 * FlxG.height : FlxG.height * 0.89);
+		actualBar.loadGraphic(Paths.image('healthBar'));
+		actualBar.screenCenter(X);
+		actualBar.visible = !ClientPrefs.hideHud;
+		actualBar.cameras = [camHUD];
+		insert(members.indexOf(healthBar) + 1, actualBar);
+
 		iconP1 = new HealthIcon(boyfriend.healthIcon, true);
 		iconP1.y = healthBar.y - 75;
 		iconP1.visible = !ClientPrefs.hideHud;
@@ -1181,6 +1189,21 @@ class PlayState extends MusicBeatState
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
+
+		// yes this is a array of sprites
+		var coolObjectArray:Array<FlxSprite> = 
+		[
+			healthBarBG,
+			healthBar,
+			iconP1,
+			iconP2,
+			actualBar
+		];
+
+		for(objects in coolObjectArray)
+			{
+				objects.y -= 7;
+			}
 
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
@@ -3297,7 +3320,6 @@ class PlayState extends MusicBeatState
 			checkEventNote();
 		}
 
-		#if debug
 		if(!endingSong && !startingSong) {
 			if (FlxG.keys.justPressed.ONE) {
 				KillNotes();
@@ -3308,7 +3330,6 @@ class PlayState extends MusicBeatState
 				clearNotesBefore(Conductor.songPosition);
 			}
 		}
-		#end
 
 		setOnLuas('cameraX', camFollowPos.x);
 		setOnLuas('cameraY', camFollowPos.y);
@@ -3951,6 +3972,14 @@ class PlayState extends MusicBeatState
 				openChartEditor();
 				return;
 			}
+
+			// omfg stop crashing goddamn!!!!!!
+			if(SONG.song.toLowerCase() == "sirokou" && isStoryMode && FlxG.save.data.week1Lock != null)
+				{
+					Data.week1Lock = "unlocked";
+					FlxG.save.data.week1Lock = "unlocked";
+					Data.save();
+				}
 
 			if (isStoryMode)
 			{

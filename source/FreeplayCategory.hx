@@ -307,24 +307,6 @@ class FreeplayCategory extends MusicBeatState
 			persistentUpdate = false;
 			openSubState(new GameplayChangersSubstate());
 		}
-		else if(space)
-		{
-			if(instPlaying != curSelected)
-			{
-				#if PRELOAD_ALL
-				destroyFreeplayVocals();
-				FlxG.sound.music.volume = 0;
-				Paths.currentModDirectory = songs[curSelected].folder;
-				var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
-				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
-				vocals = new FlxSound();
-
-				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0.7);
-				instPlaying = curSelected;
-				#end
-			}
-		}
-
 		else if (accepted)
 		{
 			persistentUpdate = false;
