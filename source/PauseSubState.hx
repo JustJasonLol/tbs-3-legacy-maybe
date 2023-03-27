@@ -38,12 +38,12 @@ class PauseSubState extends MusicBeatSubstate
 		super();
 		if(CoolUtil.difficulties.length < 2) menuItemsOG.remove('Change Difficulty'); //No need to change difficulty if there is only one!
 
-		if(PlayState.chartingMode)
+		if(funkin.game.PlayState.chartingMode)
 		{
 			menuItemsOG.insert(2, 'Leave Charting Mode');
 			
 			var num:Int = 0;
-			if(!PlayState.instance.startingSong)
+			if(!funkin.game.PlayState.instance.startingSong)
 			{
 				num = 1;
 				menuItemsOG.insert(3, 'Skip Time');
@@ -78,7 +78,7 @@ class PauseSubState extends MusicBeatSubstate
 		add(bg);
 
 		var levelInfo:FlxText = new FlxText(20, 15, 0, "", 32);
-		levelInfo.text += PlayState.SONG.song;
+		levelInfo.text += funkin.game.PlayState.SONG.song;
 		levelInfo.scrollFactor.set();
 		levelInfo.setFormat(Paths.font("vcr.ttf"), 32);
 		levelInfo.updateHitbox();
@@ -92,7 +92,7 @@ class PauseSubState extends MusicBeatSubstate
 		add(levelDifficulty);
 
 		var blueballedTxt:FlxText = new FlxText(20, 15 + 64, 0, "", 32);
-		blueballedTxt.text = "Blueballed: " + PlayState.deathCounter;
+		blueballedTxt.text = "Blueballed: " + funkin.game.PlayState.deathCounter;
 		blueballedTxt.scrollFactor.set();
 		blueballedTxt.setFormat(Paths.font('vcr.ttf'), 32);
 		blueballedTxt.updateHitbox();
@@ -103,7 +103,7 @@ class PauseSubState extends MusicBeatSubstate
 		practiceText.setFormat(Paths.font('vcr.ttf'), 32);
 		practiceText.x = FlxG.width - (practiceText.width + 20);
 		practiceText.updateHitbox();
-		practiceText.visible = PlayState.instance.practiceMode;
+		practiceText.visible = funkin.game.PlayState.instance.practiceMode;
 		add(practiceText);
 
 		var chartingText:FlxText = new FlxText(20, 15 + 101, 0, "CHARTING MODE", 32);
@@ -112,7 +112,7 @@ class PauseSubState extends MusicBeatSubstate
 		chartingText.x = FlxG.width - (chartingText.width + 20);
 		chartingText.y = FlxG.height - (chartingText.height + 20);
 		chartingText.updateHitbox();
-		chartingText.visible = PlayState.chartingMode;
+		chartingText.visible = funkin.game.PlayState.chartingMode;
 		add(chartingText);
 
 		blueballedTxt.alpha = 0;
@@ -195,14 +195,14 @@ class PauseSubState extends MusicBeatSubstate
 			if (menuItems == difficultyChoices)
 			{
 				if(menuItems.length - 1 != curSelected && difficultyChoices.contains(daSelected)) {
-					var name:String = PlayState.SONG.song;
+					var name:String = funkin.game.PlayState.SONG.song;
 					var poop = Highscore.formatSong(name, curSelected);
-					PlayState.SONG = Song.loadFromJson(poop, name);
-					PlayState.storyDifficulty = curSelected;
+					funkin.game.PlayState.SONG = Song.loadFromJson(poop, name);
+					funkin.game.PlayState.storyDifficulty = curSelected;
 					MusicBeatState.resetState();
 					FlxG.sound.music.volume = 0;
-					PlayState.changedDifficulty = true;
-					PlayState.chartingMode = false;
+					funkin.game.PlayState.changedDifficulty = true;
+					funkin.game.PlayState.chartingMode = false;
 					return;
 				}
 
@@ -219,62 +219,62 @@ class PauseSubState extends MusicBeatSubstate
 					deleteSkipTimeText();
 					regenMenu();
 				case 'Toggle Practice Mode':
-					PlayState.instance.practiceMode = !PlayState.instance.practiceMode;
-					PlayState.changedDifficulty = true;
-					practiceText.visible = PlayState.instance.practiceMode;
+					funkin.game.PlayState.instance.practiceMode = !funkin.game.PlayState.instance.practiceMode;
+					funkin.game.PlayState.changedDifficulty = true;
+					practiceText.visible = funkin.game.PlayState.instance.practiceMode;
 				case "Restart Song":
 					restartSong();
 				case "Leave Charting Mode":
 					restartSong();
-					PlayState.chartingMode = false;
+					funkin.game.PlayState.chartingMode = false;
 				case 'Skip Time':
 					if(curTime < Conductor.songPosition)
 					{
-						PlayState.startOnTime = curTime;
+						funkin.game.PlayState.startOnTime = curTime;
 						restartSong(true);
 					}
 					else
 					{
 						if (curTime != Conductor.songPosition)
 						{
-							PlayState.instance.clearNotesBefore(curTime);
-							PlayState.instance.setSongTime(curTime);
+							funkin.game.PlayState.instance.clearNotesBefore(curTime);
+							funkin.game.PlayState.instance.setSongTime(curTime);
 						}
 						close();
 					}
 				case "End Song":
 					close();
-					PlayState.instance.finishSong(true);
+					funkin.game.PlayState.instance.finishSong(true);
 				case 'Toggle Botplay':
-					PlayState.instance.cpuControlled = !PlayState.instance.cpuControlled;
-					PlayState.changedDifficulty = true;
-					PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled;
-					PlayState.instance.botplayTxt.alpha = 1;
-					PlayState.instance.botplaySine = 0;
+					funkin.game.PlayState.instance.cpuControlled = !funkin.game.PlayState.instance.cpuControlled;
+					funkin.game.PlayState.changedDifficulty = true;
+					funkin.game.PlayState.instance.botplayTxt.visible = funkin.game.PlayState.instance.cpuControlled;
+					funkin.game.PlayState.instance.botplayTxt.alpha = 1;
+					funkin.game.PlayState.instance.botplaySine = 0;
 				case "Exit to menu":
-					PlayState.deathCounter = 0;
-					PlayState.seenCutscene = false;
+					funkin.game.PlayState.deathCounter = 0;
+					funkin.game.PlayState.seenCutscene = false;
 
 					WeekData.loadTheFirstEnabledMod();
-					if(PlayState.isStoryMode) {
-						MusicBeatState.switchState(new StoryMenuState());
+					if(funkin.game.PlayState.isStoryMode) {
+						MusicBeatState.switchState(new funkin.menus.StoryMenuState());
 					} else {
-						switch(PlayState.SONG.song.toLowerCase())
+						switch(funkin.game.PlayState.SONG.song.toLowerCase())
 						{
 							case 'house-for-sale' | 'vanishing' | 'sirokou': 
-								MusicBeatState.switchState(new freeplay.main.Jerry());
+								MusicBeatState.switchState(new funkin.freeplay.main.Jerry());
 							case 'blue' | 'tragical-comedy' | 'shattered':
-								MusicBeatState.switchState(new freeplay.main.Tom());
+								MusicBeatState.switchState(new funkin.freeplay.main.Tom());
 							case 'funny-cartoon' | 'cat-chase' | 'unstoppable-block':
-								MusicBeatState.switchState(new freeplay.main.WhyDidYallAddPibbyGoddamn());
+								MusicBeatState.switchState(new funkin.freeplay.main.WhyDidYallAddPibbyGoddamn());
 							default: // ain't gonna do a case for the tons of extras
-								MusicBeatState.switchState(new freeplay.ExtrasState());
+								MusicBeatState.switchState(new funkin.freeplay.ExtrasState());
 						}
 					}
-					PlayState.cancelMusicFadeTween();
+					funkin.game.PlayState.cancelMusicFadeTween();
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
-					PlayState.changedDifficulty = false;
-					PlayState.chartingMode = false;
+					funkin.game.PlayState.changedDifficulty = false;
+					funkin.game.PlayState.chartingMode = false;
 			}
 		}
 	}
@@ -293,9 +293,9 @@ class PauseSubState extends MusicBeatSubstate
 
 	public static function restartSong(noTrans:Bool = false)
 	{
-		PlayState.instance.paused = true; // For lua
+		funkin.game.PlayState.instance.paused = true; // For lua
 		FlxG.sound.music.volume = 0;
-		PlayState.instance.vocals.volume = 0;
+		funkin.game.PlayState.instance.vocals.volume = 0;
 
 		if(noTrans)
 		{

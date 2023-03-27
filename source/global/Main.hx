@@ -45,7 +45,7 @@ class Main extends Sprite
 	var game:_G = {
 		width: 1280, // WINDOW width
 		height: 720, // WINDOW height
-		initialState: TitleState, // initial game state
+		initialState: funkin.menus.TitleState, // initial game state
 		zoom: -1.0, // game state bounds
 		framerate: 120, // default framerate
 		skipSplash: false, // if the default flixel splash screen should be skipped
@@ -112,7 +112,7 @@ class Main extends Sprite
 		}
 		#end
 
-		if (Type.getClass(FlxG.state) == PlayState)
+		if (Type.getClass(FlxG.state) == funkin.game.PlayState)
 			FlxG.autoPause = true;
 		else
 			FlxG.autoPause = false;

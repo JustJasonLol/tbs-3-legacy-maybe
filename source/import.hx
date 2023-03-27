@@ -5,3 +5,5 @@ import global.*;
 
 using StringTools;
 using data.Data;
+using data.ClientPrefs;
+using funkin.utils.CoolUtil;

@@ -56,7 +56,7 @@ class MusicBeatState extends FlxUIState
 			if(curStep > 0)
 				stepHit();
 
-			if(PlayState.SONG != null)
+			if(funkin.game.PlayState.SONG != null)
 			{
 				if (oldStep < curStep)
 					updateSection();
@@ -89,9 +89,9 @@ class MusicBeatState extends FlxUIState
 		var lastSection:Int = curSection;
 		curSection = 0;
 		stepsToDo = 0;
-		for (i in 0...PlayState.SONG.notes.length)
+		for (i in 0...funkin.game.PlayState.SONG.notes.length)
 		{
-			if (PlayState.SONG.notes[i] != null)
+			if (funkin.game.PlayState.SONG.notes[i] != null)
 			{
 				stepsToDo += Math.round(getBeatsOnSection() * 4);
 				if(stepsToDo > curStep) break;
@@ -170,7 +170,7 @@ class MusicBeatState extends FlxUIState
 	function getBeatsOnSection()
 	{
 		var val:Null<Float> = 4;
-		if(PlayState.SONG != null && PlayState.SONG.notes[curSection] != null) val = PlayState.SONG.notes[curSection].sectionBeats;
+		if(funkin.game.PlayState.SONG != null && funkin.game.PlayState.SONG.notes[curSection] != null) val = funkin.game.PlayState.SONG.notes[curSection].sectionBeats;
 		return val == null ? 4 : val;
 	}
 }

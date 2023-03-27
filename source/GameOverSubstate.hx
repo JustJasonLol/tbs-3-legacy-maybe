@@ -1,6 +1,5 @@
 package;
 
-import freeplay.main.Tom;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSubState;
@@ -38,7 +37,7 @@ class GameOverSubstate extends MusicBeatSubstate
 	override function create()
 	{
 		instance = this;
-		PlayState.instance.callOnLuas('onGameOverStart', []);
+		funkin.game.PlayState.instance.callOnLuas('onGameOverStart', []);
 
 		super.create();
 	}
@@ -47,7 +46,7 @@ class GameOverSubstate extends MusicBeatSubstate
 	{
 		super();
 
-		PlayState.instance.setOnLuas('inGameOver', true);
+		funkin.game.PlayState.instance.setOnLuas('inGameOver', true);
 
 		Conductor.songPosition = 0;
 
@@ -77,7 +76,7 @@ class GameOverSubstate extends MusicBeatSubstate
 	{
 		super.update(elapsed);
 
-		PlayState.instance.callOnLuas('onUpdate', [elapsed]);
+		funkin.game.PlayState.instance.callOnLuas('onUpdate', [elapsed]);
 		if(updateCamera) {
 			var lerpVal:Float = CoolUtil.boundTo(elapsed * 0.6, 0, 1);
 			camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
@@ -91,28 +90,28 @@ class GameOverSubstate extends MusicBeatSubstate
 		if (controls.BACK)
 		{
 			FlxG.sound.music.stop();
-			PlayState.deathCounter = 0;
-			PlayState.seenCutscene = false;
-			PlayState.chartingMode = false;
+			funkin.game.PlayState.deathCounter = 0;
+			funkin.game.PlayState.seenCutscene = false;
+			funkin.game.PlayState.chartingMode = false;
 
 			WeekData.loadTheFirstEnabledMod();
-			if (PlayState.isStoryMode)
-				MusicBeatState.switchState(new StoryMenuState());
+			if (funkin.game.PlayState.isStoryMode)
+				MusicBeatState.switchState(new funkin.menus.StoryMenuState());
 			else
-				switch(PlayState.SONG.song.toLowerCase())
+				switch(funkin.game.PlayState.SONG.song.toLowerCase())
 				{
 					case 'house-for-sale' | 'vanishing' | 'sirokou': 
-						MusicBeatState.switchState(new freeplay.main.Jerry());
+						MusicBeatState.switchState(new funkin.freeplay.main.Jerry());
 					case 'blue' | 'tragical-comedy' | 'shattered':
-						MusicBeatState.switchState(new Tom());
+						MusicBeatState.switchState(new funkin.freeplay.main.Tom());
 					case 'funny-cartoon' | 'cat-chase' | 'unstoppable-block':
-						MusicBeatState.switchState(new freeplay.main.WhyDidYallAddPibbyGoddamn());
+						MusicBeatState.switchState(new funkin.freeplay.main.WhyDidYallAddPibbyGoddamn());
 					default: // ain't gonna do a case for the tons of extras
-						MusicBeatState.switchState(new freeplay.ExtrasState());
+						MusicBeatState.switchState(new funkin.freeplay.ExtrasState());
 				}
 
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
-			PlayState.instance.callOnLuas('onGameOverConfirm', [false]);
+			funkin.game.PlayState.instance.callOnLuas('onGameOverConfirm', [false]);
 		}
 
 		if (boyfriend.animation.curAnim != null && boyfriend.animation.curAnim.name == 'firstDeath')
@@ -126,7 +125,7 @@ class GameOverSubstate extends MusicBeatSubstate
 
 			if (boyfriend.animation.curAnim.finished && !playingDeathSound)
 			{
-				if (PlayState.SONG.stage == 'tank')
+				if (funkin.game.PlayState.SONG.stage == 'tank')
 				{
 					playingDeathSound = true;
 					coolStartDeath(0.2);
@@ -153,7 +152,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		{
 			Conductor.songPosition = FlxG.sound.music.time;
 		}
-		PlayState.instance.callOnLuas('onUpdatePost', [elapsed]);
+		funkin.game.PlayState.instance.callOnLuas('onUpdatePost', [elapsed]);
 	}
 
 	override function beatHit()
@@ -185,7 +184,7 @@ class GameOverSubstate extends MusicBeatSubstate
 					MusicBeatState.resetState();
 				});
 			});
-			PlayState.instance.callOnLuas('onGameOverConfirm', [true]);
+			funkin.game.PlayState.instance.callOnLuas('onGameOverConfirm', [true]);
 		}
 	}
 }

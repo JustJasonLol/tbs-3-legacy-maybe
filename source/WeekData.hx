@@ -197,7 +197,7 @@ class WeekData {
 					weekFile.folder = directory.substring(Paths.mods().length, directory.length-1);
 					#end
 				}
-				if((PlayState.isStoryMode && !weekFile.hideStoryMode) || (!PlayState.isStoryMode && !weekFile.hideFreeplay))
+				if((funkin.game.PlayState.isStoryMode && !weekFile.hideStoryMode) || (!funkin.game.PlayState.isStoryMode && !weekFile.hideFreeplay))
 				{
 					weeksLoaded.set(weekToCheck, weekFile);
 					weeksList.push(weekToCheck);
@@ -226,14 +226,14 @@ class WeekData {
 
 	//   FUNCTIONS YOU WILL PROBABLY NEVER NEED TO USE
 
-	//To use on PlayState.hx or Highscore stuff
+	//To use on funkin.game.PlayState.hx or Highscore stuff
 	public static function getWeekFileName():String {
-		return weeksList[PlayState.storyWeek];
+		return weeksList[funkin.game.PlayState.storyWeek];
 	}
 
 	//Used on LoadingState, nothing really too relevant
 	public static function getCurrentWeek():WeekData {
-		return weeksLoaded.get(weeksList[PlayState.storyWeek]);
+		return weeksLoaded.get(weeksList[funkin.game.PlayState.storyWeek]);
 	}
 
 	public static function setDirectoryFromWeek(?data:WeekData = null) {
