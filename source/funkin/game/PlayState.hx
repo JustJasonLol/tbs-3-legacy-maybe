@@ -271,6 +271,9 @@ class PlayState extends MusicBeatState
 	var tankmanRun:FlxTypedGroup<TankmenBG>;
 	var foregroundSprites:FlxTypedGroup<BGSprite>;
 
+	// for a event in invade and blammed lights replacement because is cringe
+	public var alienBG:BGSprite;
+
 	var invisibleBars:FlxSprite;
 
 	public var songScore:Int = 0;
@@ -293,7 +296,7 @@ class PlayState extends MusicBeatState
 
 	public var inCutscene:Bool = false;
 	public var skipCountdown:Bool = false;
-	var songLength:Float = 0;
+	public var songLength:Float = 0;
 
 	public var boyfriendCameraOffset:Array<Float> = null;
 	public var opponentCameraOffset:Array<Float> = null;
@@ -848,16 +851,21 @@ class PlayState extends MusicBeatState
 				foregroundSprites.add(new BGSprite('tank5', 1620, 700, 1.5, 1.5, ['fg']));
 				if(!ClientPrefs.lowQuality) foregroundSprites.add(new BGSprite('tank3', 1300, 1200, 3.5, 2.5, ['fg']));
 
-			case 'computer':
+			case 'computer': // cool looking song where bf is literally a mouse
 				var bg:BGSprite = new BGSprite('BG', -600, 30);
 				add(bg);
 
 				var peakComputer:BGSprite = new BGSprite('computer', -600, 30);
 				add(peakComputer);
 
+				// for hitbox
 				invisibleBars = new FlxSprite(840, 405).makeGraphic(220, 150, FlxColor.BLACK);
-				invisibleBars.alpha = 0.001;
+				invisibleBars.alpha = 0;
 				add(invisibleBars);
+
+			case 'alien': // Invade 
+				alienBG = new BGSprite('alien', -600, 30);
+				add(alienBG);
 		}
 
 		switch(Paths.formatToSongPath(SONG.song))
@@ -1410,8 +1418,14 @@ class PlayState extends MusicBeatState
 		CustomFadeTransition.nextCamera = camOther;
 		if(eventNotes.length < 1) checkEventNote();
 
-		invadeEvents = new InvadeEvents();
-		invadeEvents.createObjects();
+		switch(SONG.song.toLowerCase().replace('-', ' '))
+		{
+			case 'invade':
+				invadeEvents = new InvadeEvents();
+				invadeEvents.createObjects();
+
+			default: //nothing lmao
+		}
 	}
 
 	#if (!flash && sys)
@@ -5083,6 +5097,7 @@ class PlayState extends MusicBeatState
 		}
 		FlxAnimationController.globalSpeed = 1;
 		FlxG.sound.music.pitch = 1;
+		FlxG.game.setFilters([]);
 		super.destroy();
 	}
 
@@ -5110,6 +5125,9 @@ class PlayState extends MusicBeatState
 		lastStepHit = curStep;
 		setOnLuas('curStep', curStep);
 		callOnLuas('onStepHit', []);
+
+		if(SONG.song.toLowerCase() == "invade")
+			invadeEvents.stepHitEvents(curStep);
 	}
 
 	var lightningStrikeBeat:Int = 0;
@@ -5153,6 +5171,10 @@ class PlayState extends MusicBeatState
 		if(SONG.song.toLowerCase() == "invade")
 			{
 				invadeEvents.beatHitEvents(curBeat);
+				if(curBeat == 72)
+					{
+						FlxG.game.setFilters([new ShaderFilter(InvadeEvents.coolShader)]);
+					}
 			}
 
 		switch (curStage)

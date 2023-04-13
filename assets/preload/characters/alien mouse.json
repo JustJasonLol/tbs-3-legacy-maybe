@@ -1,114 +1,114 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				21,
 				3
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "idle",
-			"loop": false,
-			"name": "alien idle"
+			"fps": 24,
+			"name": "alien idle",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				15,
 				4
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singUP",
-			"loop": false,
-			"name": "alien up"
+			"fps": 24,
+			"name": "alien up",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				24,
 				2
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singRIGHT",
-			"loop": false,
-			"name": "alien right"
+			"fps": 24,
+			"name": "alien right",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				15,
 				1
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "bye lol",
-			"loop": false,
-			"name": "melt"
+			"fps": 24,
+			"name": "melt",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				9,
 				8
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singLEFT",
-			"loop": false,
-			"name": "alien left"
+			"fps": 24,
+			"name": "alien left",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				23,
 				4
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singDOWN",
-			"loop": false,
-			"name": "alien down"
+			"fps": 24,
+			"name": "alien down",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				260,
 				270
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singUP-alt",
-			"loop": false,
-			"name": "ualt"
+			"fps": 24,
+			"name": "ualt",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				160,
 				26
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singDOWN-alt",
-			"loop": false,
-			"name": "dalt"
+			"fps": 24,
+			"name": "dalt",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				260,
 				30
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singLEFT-alt",
-			"loop": false,
-			"name": "lalt"
+			"fps": 24,
+			"name": "lalt",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				140,
 				220
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singRIGHT-alt",
-			"loop": false,
-			"name": "ralt"
+			"fps": 24,
+			"name": "ralt",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
@@ -125,8 +125,8 @@
 		111
 	],
 	"camera_position": [
-		-180,
-		100
+		0,
+		70
 	],
 	"sing_duration": 6.99999999999999,
 	"scale": 0.899999999999999

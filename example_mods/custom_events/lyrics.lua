@@ -1,7 +1,8 @@
 function onCreatePost()
 	makeLuaText('Lyrics', (value1), 1250, 0, 480)
 	setTextAlignment('Lyrics', 'Center')
-        setObjectCamera('Lyrics', 'other')
+    setObjectCamera('Lyrics', 'other')
+	setTextFont('Lyrics', 'fnf_vcr.ttf')
 	addLuaText('Lyrics')
 	setTextSize('Lyrics', 28)
 end
