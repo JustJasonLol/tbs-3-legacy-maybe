@@ -9,6 +9,8 @@ import Song.SwagSong;
 import flixel.FlxBasic;
 import flixel.FlxCamera;
 import flixel.FlxG;
+import funkin.substates.GameOverSubstate;
+import funkin.game.Events;
 import flixel.FlxGame;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -331,6 +333,15 @@ class PlayState extends MusicBeatState
 	public static var lastCombo:FlxSprite;
 	// stores the last combo score objects in an array
 	public static var lastScore:Array<FlxSprite> = [];
+
+	// Mid song events stuff
+	var spaceWarning:FlxSprite;
+	var dodgeTimer:Float = 0;
+	var allowDodge:Bool = false;
+	var hasDodged:Bool = false;
+
+	// HARDCODED Events
+	var invadeEvents:InvadeEvents;
 
 	override public function create()
 	{
@@ -1174,6 +1185,15 @@ class PlayState extends MusicBeatState
 			botplayTxt.y = timeBarBG.y - 78;
 		}
 
+		spaceWarning = new FlxSprite();
+		spaceWarning.frames = Paths.getSparrowAtlas('spacebar');
+		spaceWarning.animation.addByPrefix('idle', 'spacebar', 25, true);
+		spaceWarning.screenCenter();
+		spaceWarning.x += 200;
+		spaceWarning.animation.play('idle');
+		spaceWarning.cameras = [camOther];
+		spaceWarning.scale.set(1.30, 1.30);
+
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
 		notes.cameras = [camHUD];
@@ -1389,6 +1409,9 @@ class PlayState extends MusicBeatState
 		
 		CustomFadeTransition.nextCamera = camOther;
 		if(eventNotes.length < 1) checkEventNote();
+
+		invadeEvents = new InvadeEvents();
+		invadeEvents.createObjects();
 	}
 
 	#if (!flash && sys)
@@ -3042,6 +3065,27 @@ class PlayState extends MusicBeatState
 			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
 		}
 
+		if(allowDodge && FlxG.keys.justPressed.SPACE)
+			{
+				hasDodged = true;
+				FlxG.sound.play(Paths.sound('Dodged'));
+
+				if(boyfriend.animation.curAnim.name.contains('dodge')) {
+				boyfriend.animation.play('dodge', true);
+				boyfriend.specialAnim = true;
+				}
+
+				if(spaceWarning != null)
+					remove(spaceWarning);
+
+				allowDodge = false;
+
+				if(dad.animation.curAnim.name.contains('fuck you')) {
+					dad.animation.play('fuck you', true);
+					dad.specialAnim = true;
+				}
+			}
+
 		if (controls.PAUSE && startedCountdown && canPause)
 		{
 			var ret:Dynamic = callOnLuas('onPause', [], false);
@@ -3815,6 +3859,24 @@ class PlayState extends MusicBeatState
 				} else {
 					FunkinLua.setVarInArray(this, value1, value2);
 				}
+
+			case 'DodgeEvent':
+				var val1 = Std.parseFloat(value1);
+				dodgeTimer = val1;
+				add(spaceWarning);
+				FlxG.sound.play(Paths.sound('DODGE'));
+				allowDodge = true;
+
+				new FlxTimer().start(dodgeTimer, function(e)
+					{
+						if(!hasDodged)
+							{
+								health -= 500;
+								FlxG.sound.play(Paths.sound('dead'));
+							} else {
+								hasDodged = false; 
+							}
+					});
 		}
 		callOnLuas('onEvent', [eventName, value1, value2]);
 	}
@@ -5087,6 +5149,11 @@ class PlayState extends MusicBeatState
 		{
 			dad.dance();
 		}
+
+		if(SONG.song.toLowerCase() == "invade")
+			{
+				invadeEvents.beatHitEvents(curBeat);
+			}
 
 		switch (curStage)
 		{

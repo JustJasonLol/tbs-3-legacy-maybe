@@ -5,10 +5,10 @@
 				-95,
 				-116
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "singLEFT",
-			"loop": false,
+			"indices": [],
 			"name": "alien cat left"
 		},
 		{
@@ -16,10 +16,10 @@
 				-146,
 				-127
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "singDOWN",
-			"loop": false,
+			"indices": [],
 			"name": "alien cat down"
 		},
 		{
@@ -27,10 +27,10 @@
 				-19,
 				96
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "singUP",
-			"loop": false,
+			"indices": [],
 			"name": "alien cat up"
 		},
 		{
@@ -38,10 +38,10 @@
 				-130,
 				42
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "singRIGHT",
-			"loop": false,
+			"indices": [],
 			"name": "alien cat right"
 		},
 		{
@@ -49,10 +49,10 @@
 				0,
 				0
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "idle",
-			"loop": false,
+			"indices": [],
 			"name": "alien cat idle"
 		}
 	],
@@ -70,8 +70,8 @@
 		80
 	],
 	"camera_position": [
-		-220,
-		-250
+		70,
+		-60
 	],
 	"sing_duration": 6.1,
 	"scale": 1.3
