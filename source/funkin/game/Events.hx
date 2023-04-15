@@ -96,6 +96,7 @@ class InvadeEvents extends FlxTypedGroup<Dynamic>
                     PlayState.instance.songMisses = 0;
                     PlayState.instance.songScore = 0;
                     PlayState.instance.ratingPercent = 0;
+                    PlayState.instance.RecalculateRating();
                     coolShader.setFloat('aberration', 0.05);
                     coolShader.setFloat('effectTime', 0.05); // this one is needed apparently
 
@@ -112,12 +113,13 @@ class InvadeEvents extends FlxTypedGroup<Dynamic>
                     PlayState.instance.songMisses = 0;
                     PlayState.instance.songScore = 0;
                     PlayState.instance.ratingPercent = 0;
+                    PlayState.instance.RecalculateRating();
                     PlayState.instance.defaultCamZoom = 0.9;
                 
                 case 176: 
                     PlayState.instance.defaultCamZoom = 1.2;
                     FlxTween.tween(blackSprite, {alpha: 0.85}, 0.7, {ease: FlxEase.cubeInOut});
-                    FlxTween.tween(PlayState.instance.gf, {alpha: 0.25}, 0.7, {ease: FlxEase.cubeInOut});
+                    FlxTween.tween(PlayState.instance.gf, {alpha: 0.2}, 0.7, {ease: FlxEase.cubeInOut});
                     coolShader.setFloat('aberration', 0.1);
                     coolShader.setFloat('effectTime', 0.1);
 
@@ -129,13 +131,16 @@ class InvadeEvents extends FlxTypedGroup<Dynamic>
                     coolShader.setFloat('effectTime', 0.18);
                     healthDrain = true;
 
+                case 367: 
+                    healthDrain = false;
+
                 case 401:
                     PlayState.instance.camGame.fade(FlxColor.BLACK, 1.5);
                     FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 3.7, {ease: FlxEase.sineInOut});
             }
 
-            if(PlayState.instance.health > 0.3 && healthDrain)
-                PlayState.instance.health -= 0.029 * multipler;
+            if(healthDrain)
+                PlayState.instance.health -= 0.026 * multipler;
 
             if(healthDrain && curBeat % 5 == 0)
                 multipler += 0.1;

@@ -61,6 +61,8 @@ import StageData;
 import FunkinLua;
 import DialogueBoxPsych;
 import Conductor.Rating;
+import funkin.game.PhillyGlow;
+import funkin.substates.PauseSubState;
 
 #if !flash 
 import flixel.addons.display.FlxRuntimeShader;
@@ -5171,7 +5173,7 @@ class PlayState extends MusicBeatState
 		if(SONG.song.toLowerCase() == "invade")
 			{
 				invadeEvents.beatHitEvents(curBeat);
-				if(curBeat == 72)
+				if(curBeat == 72 && ClientPrefs.shaders)
 					{
 						FlxG.game.setFilters([new ShaderFilter(InvadeEvents.coolShader)]);
 					}
