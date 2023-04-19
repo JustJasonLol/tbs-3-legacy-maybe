@@ -3456,6 +3456,7 @@ class PlayState extends MusicBeatState
 				for (timer in modchartTimers) {
 					timer.active = true;
 				}
+				FlxG.game.setFilters([]);
 				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x - boyfriend.positionArray[0], boyfriend.getScreenPosition().y - boyfriend.positionArray[1], camFollowPos.x, camFollowPos.y));
 
 				// MusicBeatState.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
@@ -5176,6 +5177,11 @@ class PlayState extends MusicBeatState
 				if(curBeat == 72 && ClientPrefs.shaders)
 					{
 						FlxG.game.setFilters([new ShaderFilter(InvadeEvents.coolShader)]);
+					}
+
+				if(curBeat == 240 && ClientPrefs.shaders)
+					{
+						FlxG.game.setFilters([new ShaderFilter(InvadeEvents.bloom0_0), new ShaderFilter(InvadeEvents.coolShader)]);
 					}
 			}
 

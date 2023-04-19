@@ -1,6 +1,5 @@
 package funkin.substates;
 
-import flixel.tweens.misc.NumTween;
 import sys.io.File;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -74,11 +73,14 @@ class GameOverSubstate extends MusicBeatSubstate
 		aberration.setFloat('aberration', 0.5);
 		aberration.setFloat('effectTime', 0.05);
 
-		FlxG.camera.setFilters([
-			new ShaderFilter(monitor),
-			new ShaderFilter(bloom),
-			new ShaderFilter(aberration),
-		]);
+		if(ClientPrefs.shaders)
+			{
+				FlxG.camera.setFilters([
+					new ShaderFilter(monitor),
+					new ShaderFilter(bloom),
+					new ShaderFilter(aberration),
+				]);
+			}
 
 		boyfriend.playAnim('firstDeath');
 
@@ -170,6 +172,8 @@ class GameOverSubstate extends MusicBeatSubstate
 			Conductor.songPosition = FlxG.sound.music.time;
 		}
 		funkin.game.PlayState.instance.callOnLuas('onUpdatePost', [elapsed]);
+
+		FlxG.camera.zoom = FlxMath.lerp(1, FlxG.camera.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125), 0, 1));
 	}
 
 	override function beatHit()
@@ -179,7 +183,6 @@ class GameOverSubstate extends MusicBeatSubstate
 		if(!isEnding && curBeat % 2 == 0)
 			{
 				FlxG.camera.zoom += 0.065;
-				FlxTween.tween(FlxG.camera, {zoom: 1}, 0.7, {startDelay: 0.1});
 			}
 	}
 

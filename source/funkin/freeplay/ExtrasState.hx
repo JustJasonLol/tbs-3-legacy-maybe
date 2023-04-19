@@ -57,6 +57,10 @@ class ExtrasState extends MusicBeatState
 
 	var shader:FlxRuntimeShader;
 
+	var coolShader:FlxRuntimeShader;
+
+	var aberrationValue:Float = 0;
+
 	override function create() 
 	{	
 		#if desktop
@@ -70,6 +74,7 @@ class ExtrasState extends MusicBeatState
 
 		#if sys
 		shader = new FlxRuntimeShader(File.getContent('./mods/shaders/monitor.frag'), null, 140);
+		coolShader = new FlxRuntimeShader(File.getContent('./mods/shaders/aberration.frag'), null, 140);
 		if(ClientPrefs.shaders) {
 		FlxG.camera.setFilters([new ShaderFilter(shader)]);
 		}
@@ -198,6 +203,8 @@ class ExtrasState extends MusicBeatState
 			MusicBeatState.switchState(new funkin.menus.FreeplayCategory());
 
 		super.update(elapsed);
+
+		coolShader.setFloat('aberration', aberrationValue);
 	}
 
 	// more messy stuff 😔
@@ -240,6 +247,10 @@ class ExtrasState extends MusicBeatState
 				song1.visible = false;
 				song3.visible = false;
 				selectedString = "none-of-all";
+				aberrationValue = 0;
+				if(ClientPrefs.shaders) {
+					FlxG.camera.setFilters([new ShaderFilter(shader)]);
+				}
 
 			case 4:
 				image2.visible = false;
@@ -249,6 +260,11 @@ class ExtrasState extends MusicBeatState
 				song3.visible = true;
 				song4.visible = false;
 				selectedString = "invade";
+				FlxTween.tween(this, {aberrationValue: 0.45}, 3, {ease: FlxEase.sineInOut});
+                coolShader.setFloat('effectTime', 0.001);
+				if(ClientPrefs.shaders) {
+					FlxG.camera.setFilters([new ShaderFilter(shader), new ShaderFilter(coolShader)]);
+				}
 
 			case 5:
 				image3.visible = false;
@@ -258,6 +274,10 @@ class ExtrasState extends MusicBeatState
 				song4.visible = true;
 				song5.visible = false;
 				selectedString = "jam";
+				aberrationValue = 0;
+				if(ClientPrefs.shaders) {
+					FlxG.camera.setFilters([new ShaderFilter(shader)]);
+				}
 
 			case 6:
 				image4.visible = false;

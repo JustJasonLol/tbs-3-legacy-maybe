@@ -2,10 +2,8 @@ package funkin.game;
 
 import sys.io.File;
 import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.FlxObject;
 import flixel.util.FlxColor;
 import flixel.FlxG;
-import flixel.FlxBasic;
 import flixel.text.FlxText;
 import flixel.FlxSprite;
 import flixel.tweens.FlxTween;
@@ -24,6 +22,10 @@ class InvadeEvents extends FlxTypedGroup<Dynamic>
     var healthDrain:Bool = false;
 
     public static var coolShader:FlxRuntimeShader;
+
+    public static var bloom0_0:FlxRuntimeShader;
+
+    var gradient:FlxSprite;
 
     public function new()
         {
@@ -45,6 +47,13 @@ class InvadeEvents extends FlxTypedGroup<Dynamic>
             blackSprite.screenCenter();
             blackSprite.alpha = 0;
             PlayState.instance.addBehindGF(blackSprite);
+
+            gradient = new FlxSprite(0, 0, Paths.image('gradient', 'shared'));
+            gradient.cameras = [PlayState.instance.camOther];
+            gradient.screenCenter();
+            gradient.setGraphicSize(Std.int(gradient.width * 0.55));
+            gradient.alpha = 0;
+            PlayState.instance.add(gradient);
 
             PlayState.instance.camGame.fade(FlxColor.BLACK, 0.001);
             PlayState.instance.camHUD.alpha = 0;
@@ -99,6 +108,7 @@ class InvadeEvents extends FlxTypedGroup<Dynamic>
                     PlayState.instance.RecalculateRating();
                     coolShader.setFloat('aberration', 0.05);
                     coolShader.setFloat('effectTime', 0.05); // this one is needed apparently
+                    FlxTween.tween(gradient, {alpha: 0.08}, 1);
 
 
                 case 104: 
@@ -115,6 +125,7 @@ class InvadeEvents extends FlxTypedGroup<Dynamic>
                     PlayState.instance.ratingPercent = 0;
                     PlayState.instance.RecalculateRating();
                     PlayState.instance.defaultCamZoom = 0.9;
+                    FlxTween.tween(gradient, {alpha: 0.35}, 1);
                 
                 case 176: 
                     PlayState.instance.defaultCamZoom = 1.2;
@@ -122,6 +133,7 @@ class InvadeEvents extends FlxTypedGroup<Dynamic>
                     FlxTween.tween(PlayState.instance.gf, {alpha: 0.2}, 0.7, {ease: FlxEase.cubeInOut});
                     coolShader.setFloat('aberration', 0.1);
                     coolShader.setFloat('effectTime', 0.1);
+                    FlxTween.tween(gradient, {alpha: 0.55}, 1);
 
                 case 240:
                     PlayState.instance.defaultCamZoom = 0.9;
@@ -130,9 +142,12 @@ class InvadeEvents extends FlxTypedGroup<Dynamic>
                     coolShader.setFloat('aberration', 0.18);
                     coolShader.setFloat('effectTime', 0.18);
                     healthDrain = true;
+                    bloom0_0 = new FlxRuntimeShader(File.getContent('./mods/shaders/bloom.frag'), null, 140);
+                    FlxTween.tween(gradient, {alpha: 0.75 /**basement show 1.75 fanmade by maxplay games reference 0_0**/}, 1);
 
                 case 367: 
                     healthDrain = false;
+                    FlxTween.tween(gradient, {alpha: 0.45}, 1);
 
                 case 401:
                     PlayState.instance.camGame.fade(FlxColor.BLACK, 1.5);
@@ -140,10 +155,10 @@ class InvadeEvents extends FlxTypedGroup<Dynamic>
             }
 
             if(healthDrain)
-                PlayState.instance.health -= 0.026 * multipler;
+                PlayState.instance.health -= 0.027 * multipler;
 
             if(healthDrain && curBeat % 5 == 0)
-                multipler += 0.1;
+                multipler += 0.119;
 
             return this;
         }
