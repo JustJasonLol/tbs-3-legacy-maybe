@@ -58,6 +58,12 @@ class InvadeEvents extends FlxTypedGroup<Dynamic>
             PlayState.instance.camGame.fade(FlxColor.BLACK, 0.001);
             PlayState.instance.camHUD.alpha = 0;
 
+            PlayState.instance.healthBar.alpha = 0;
+            @:privateAccess PlayState.instance.healthBarBG.alpha = 0;
+            PlayState.instance.actualBar.alpha = 0;
+            PlayState.instance.iconP1.alpha = 0;
+            PlayState.instance.scoreTxt.alpha = 0;
+
             PlayState.instance.dad.alpha = 0;
             PlayState.instance.iconP2.alpha = 0;
 
@@ -101,6 +107,11 @@ class InvadeEvents extends FlxTypedGroup<Dynamic>
                     PlayState.instance.camGame.fade(FlxColor.BLACK, 0.001, true);
                     PlayState.instance.camHUD.alpha = 1;
                     PlayState.instance.songLength = FlxG.sound.music.length;
+                    PlayState.instance.healthBar.alpha = 1;
+                    @:privateAccess PlayState.instance.healthBarBG.alpha = 1;
+                    PlayState.instance.actualBar.alpha = 1;
+                    PlayState.instance.iconP1.alpha = 1;
+                    PlayState.instance.scoreTxt.alpha = 1;
                     PlayState.instance.health = 1;
                     PlayState.instance.songMisses = 0;
                     PlayState.instance.songScore = 0;
@@ -139,8 +150,8 @@ class InvadeEvents extends FlxTypedGroup<Dynamic>
                     PlayState.instance.defaultCamZoom = 0.9;
                     FlxTween.tween(blackSprite, {alpha: 0}, 0.7, {ease: FlxEase.cubeInOut});
                     FlxTween.tween(PlayState.instance.gf, {alpha: 1}, 0.7, {ease: FlxEase.cubeInOut});
-                    coolShader.setFloat('aberration', 0.18);
-                    coolShader.setFloat('effectTime', 0.18);
+                    coolShader.setFloat('aberration', 0.14);
+                    coolShader.setFloat('effectTime', 0.14);
                     healthDrain = true;
                     bloom0_0 = new FlxRuntimeShader(File.getContent('./mods/shaders/bloom.frag'), null, 140);
                     FlxTween.tween(gradient, {alpha: 0.75 /**basement show 1.75 fanmade by maxplay games reference 0_0**/}, 1);
