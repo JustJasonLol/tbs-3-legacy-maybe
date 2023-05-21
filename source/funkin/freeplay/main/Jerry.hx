@@ -71,7 +71,7 @@ class Jerry extends MusicBeatState
 		image.visible = true;
 		add(image);
 
-		image1 = new FlxSprite(841, 257).loadGraphic(Paths.image('freeplay/pictures/vanishing'));
+		image1 = new FlxSprite(841, 257).loadGraphic(Paths.image('freeplay/pictures/Evaporate'));
 		image1.visible = false;
 		add(image1);
 
@@ -83,7 +83,7 @@ class Jerry extends MusicBeatState
 		song.visible = true;
 		add(song);
 
-		song1 = new FlxSprite(150, 340).loadGraphic(Paths.image('freeplay/songs/vanishing'));
+		song1 = new FlxSprite(150, 340).loadGraphic(Paths.image('freeplay/songs/Evaporate'));
 		song1.visible = false;
 		add(song1);
 
@@ -139,7 +139,7 @@ class Jerry extends MusicBeatState
 				song1.visible = true;
 				song.visible = false;
 				song2.visible = false;
-				selectedString = "vanishing";
+				selectedString = "evaporate";
 
 			case 3:
 				image1.visible = false;

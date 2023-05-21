@@ -3,64 +3,64 @@
 		{
 			"loop": false,
 			"offsets": [
-				135,
-				54
-			],
-			"fps": 24,
-			"anim": "singLEFT",
-			"indices": [],
-			"name": "TOM LEFT"
-		},
-		{
-			"loop": false,
-			"offsets": [
-				-16,
-				103
-			],
-			"fps": 24,
-			"anim": "singDOWN",
-			"indices": [],
-			"name": "TOM DOWN"
-		},
-		{
-			"loop": false,
-			"offsets": [
-				1,
-				136
-			],
-			"fps": 24,
-			"anim": "singUP",
-			"indices": [],
-			"name": "TOM UP"
-		},
-		{
-			"loop": false,
-			"offsets": [
-				60,
-				-38
-			],
-			"fps": 24,
-			"anim": "singRIGHT",
-			"indices": [],
-			"name": "TOM RIGHT"
-		},
-		{
-			"loop": false,
-			"offsets": [
-				0,
+				-2,
 				0
 			],
-			"fps": 24,
 			"anim": "idle",
-			"indices": [],
-			"name": "TOM idle"
+			"fps": 36,
+			"name": "TOM idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				65,
+				-5
+			],
+			"anim": "singLEFT",
+			"fps": 36,
+			"name": "TOM LEFT",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-17,
+				-2
+			],
+			"anim": "singDOWN",
+			"fps": 36,
+			"name": "TOM DOWN",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				11,
+				-4
+			],
+			"anim": "singUP",
+			"fps": 36,
+			"name": "TOM UP",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				40,
+				12
+			],
+			"anim": "singRIGHT",
+			"fps": 36,
+			"name": "TOM RIGHT",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
 	"image": "characters/MADNESS-TOM",
 	"position": [
-		-180,
-		-50
+		-170,
+		200
 	],
 	"healthicon": "mc-tom",
 	"flip_x": false,
@@ -74,5 +74,5 @@
 		70
 	],
 	"sing_duration": 6.1,
-	"scale": 0.6
+	"scale": 0.9
 }

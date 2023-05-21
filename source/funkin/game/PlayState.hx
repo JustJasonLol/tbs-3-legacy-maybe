@@ -1,6 +1,6 @@
 package funkin.game;
 
-import flixel.graphics.FlxGraphic;
+#if !marco import flixel.graphics.FlxGraphic; #end
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -1523,8 +1523,6 @@ class PlayState extends MusicBeatState
 			FlxG.sound.music.pitch = value;
 		}
 		playbackRate = value;
-		FlxAnimationController.globalSpeed = value;
-		trace('Anim speed: ' + FlxAnimationController.globalSpeed);
 		Conductor.safeZoneOffset = (ClientPrefs.safeFrames / 60) * 1000 * value;
 		setOnLuas('playbackRate', playbackRate);
 		return value;
@@ -2343,9 +2341,9 @@ class PlayState extends MusicBeatState
 	public function updateScore(miss:Bool = false)
 	{
 		scoreTxt.text = 'Score: ' + songScore
-		+ ' / Combo Breaks: ' + songMisses
-		+ ' / Accuracy: ' + '${Highscore.floorDecimal(ratingPercent * 100, 2)}%'
-		+ (ratingName != '?' ? ' [$ratingFC]' : '');
+		+ ' - Combo Breaks: ' + songMisses
+		+ ' - Rank: ' + '$ratingName'
+		+ (ratingName != '?' ? ' [${Highscore.floorDecimal(ratingPercent * 100, 2)}%]' : '');
 
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
 		{
@@ -4139,7 +4137,7 @@ class PlayState extends MusicBeatState
 				}
 				switch(funkin.game.PlayState.SONG.song.toLowerCase())
 						{
-							case 'house-for-sale' | 'vanishing' | 'sirokou': 
+							case 'house-for-sale' | 'evaporate' | 'sirokou': 
 								MusicBeatState.switchState(new funkin.freeplay.main.Jerry());
 							case 'blue' | 'tragical-comedy' | 'shattered':
 								MusicBeatState.switchState(new funkin.freeplay.main.Tom());
@@ -5098,7 +5096,6 @@ class PlayState extends MusicBeatState
 			FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 			FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 		}
-		FlxAnimationController.globalSpeed = 1;
 		FlxG.sound.music.pitch = 1;
 		FlxG.game.setFilters([]);
 		super.destroy();

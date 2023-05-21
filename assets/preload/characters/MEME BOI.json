@@ -1,81 +1,81 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
-				26,
+				21,
 				3
 			],
-			"loop": false,
-			"anim": "idle",
 			"fps": 24,
-			"name": "BOI IDLE",
-			"indices": []
+			"anim": "idle",
+			"indices": [],
+			"name": "BOI IDLE"
 		},
 		{
+			"loop": false,
 			"offsets": [
 				145,
 				-38
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
-			"name": "BOI UP"
+			"fps": 24,
+			"name": "BOI UP",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-50,
 				-20
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "BOI RIGHT"
+			"fps": 24,
+			"name": "BOI RIGHT",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				30,
 				-30
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "BOI LEFT"
+			"fps": 24,
+			"name": "BOI LEFT",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				107,
 				-61
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "BOI DOWN"
+			"fps": 24,
+			"name": "BOI DOWN",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				22,
 				0
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "pussy cat lol",
-			"indices": [],
-			"name": "pussy cat lol"
+			"fps": 24,
+			"name": "pussy cat lol",
+			"indices": []
 		},
 		{
-			"loop": true,
 			"offsets": [
 				0,
 				0
 			],
-			"anim": "dead",
+			"indices": [],
 			"fps": 24,
-			"name": "dead",
-			"indices": []
+			"anim": "dead",
+			"loop": true,
+			"name": "dead"
 		}
 	],
 	"no_antialiasing": false,
@@ -92,8 +92,8 @@
 		151
 	],
 	"camera_position": [
-		-670,
-		40
+		260,
+		370
 	],
 	"sing_duration": 6.99999999999999,
 	"scale": 1.2

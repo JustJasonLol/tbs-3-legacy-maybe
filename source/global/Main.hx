@@ -2,7 +2,9 @@ package global;
 
 import flixel.FlxCamera;
 import flixel.FlxBasic;
+#if !marco
 import flixel.graphics.FlxGraphic;
+#end
 import flixel.FlxG;
 import flixel.FlxGame;
 import flixel.FlxState;

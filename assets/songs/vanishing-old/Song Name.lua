@@ -57,10 +57,10 @@ function onCreate()
 	setObjectCamera('bgThing', 'other')
     addLuaSprite('bgThing', true)
     setScrollFactor('bgThing', 0, 0)
-    setProperty('bgThing.alpha', tonumber(0.7))
+    setProperty('bgThing.alpha', tonumber(1))
 
     if count < 15 then
-        makeLuaText('songText', "".. useName.. " - ".. toughness, 400, getProperty('bgThing.x') + 180, 571) -- 20 letters is the width limit
+        makeLuaText('songText', "".. useName.. " - ".. toughness, 400, getProperty('bgThing.x') + 180, 575) -- 20 letters is the width limit
         setObjectCamera("songText", 'other');
         setTextColor('songText', '0x'..songTxtColor)
         setTextSize('songText', 40);
@@ -97,7 +97,7 @@ function onCreate()
     setTextAlignment('beforeSongText', 'left')
 
     if showCredit == true then
-        makeLuaText('whoDuntIt', "Made by - ".. name, 400, getProperty('bgThing.x') + 180, 665)
+        makeLuaText('whoDuntIt', "Made by - ".. name, 400, getProperty('bgThing.x') + 180, 625)
         setObjectCamera("whoDuntIt", 'other');
         setTextColor('whoDuntIt', '0x'..credColor)
         setTextSize('whoDuntIt', 40);

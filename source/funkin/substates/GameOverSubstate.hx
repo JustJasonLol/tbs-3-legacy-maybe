@@ -119,7 +119,7 @@ class GameOverSubstate extends MusicBeatSubstate
 			else
 				switch(funkin.game.PlayState.SONG.song.toLowerCase())
 				{
-					case 'house-for-sale' | 'vanishing' | 'sirokou': 
+					case 'house-for-sale' | 'evaporate' | 'sirokou': 
 						MusicBeatState.switchState(new funkin.freeplay.main.Jerry());
 					case 'blue' | 'tragical-comedy' | 'shattered':
 						MusicBeatState.switchState(new funkin.freeplay.main.Tom());

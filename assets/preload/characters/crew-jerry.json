@@ -1,0 +1,100 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				62,
+				-187
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "idle"
+		},
+		{
+			"offsets": [
+				146,
+				-99
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "up"
+		},
+		{
+			"offsets": [
+				132,
+				-94
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "left"
+		},
+		{
+			"offsets": [
+				191,
+				-80
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "right"
+		},
+		{
+			"offsets": [
+				92,
+				-70
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "down"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				70,
+				-100
+			],
+			"anim": "hi",
+			"fps": 24,
+			"name": "hi",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				40,
+				-200
+			],
+			"anim": "off",
+			"fps": 24,
+			"name": "off",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/crew-jerry",
+	"position": [
+		-180,
+		-120
+	],
+	"healthicon": "imp-jerry",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		170,
+		51
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 6.99999999999999,
+	"scale": 1.5
+}
