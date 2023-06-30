@@ -1,8 +1,6 @@
 package editors;
 
-#if desktop
-import Discord.DiscordClient;
-#end
+
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
@@ -31,7 +29,8 @@ import haxe.Json;
 import sys.io.File;
 import sys.FileSystem;
 #end
-import WeekData;
+import data.WeekData;
+import funkin.utils.HealthIcon;
 
 using StringTools;
 

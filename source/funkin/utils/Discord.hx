@@ -1,4 +1,4 @@
-package;
+package funkin.utils;
 
 import Sys.sleep;
 import discord_rpc.DiscordRpc;
@@ -10,7 +10,7 @@ import llua.State;
 
 using StringTools;
 
-class DiscordClient
+class Discord
 {
 	public static var isInitialized:Bool = false;
 	public function new()
@@ -63,7 +63,7 @@ class DiscordClient
 	{
 		var DiscordDaemon = sys.thread.Thread.create(() ->
 		{
-			new DiscordClient();
+			new Discord();
 		});
 		trace("Discord Client initialized");
 		isInitialized = true;
@@ -79,8 +79,8 @@ class DiscordClient
 		}
 
 		DiscordRpc.presence({
-			details: details,
-			state: state,
+			details: 'hi',
+			state: 'no leaks pls thats why evaporate name (not the song) got leaked',
 			largeImageKey: 'icon',
 			largeImageText: "Engine Version: " + funkin.menus.MainMenuState.psychEngineVersion,
 			smallImageKey : smallImageKey,

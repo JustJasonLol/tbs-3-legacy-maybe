@@ -1,8 +1,6 @@
 package funkin.menus;
 
-#if desktop
-import Discord.DiscordClient;
-#end
+
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
@@ -17,7 +15,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.net.curl.CURLCode;
 import flixel.graphics.FlxGraphic;
-import WeekData;
+import data.WeekData;
 
 using StringTools;
 
@@ -243,12 +241,7 @@ class StoryMenuState extends MusicBeatState
 				changeDifficulty(-1);
 			else if (upP || downP)
 				changeDifficulty();
-
-			if(FlxG.keys.justPressed.CONTROL)
-			{
-				persistentUpdate = false;
-				openSubState(new GameplayChangersSubstate());
-			}
+			
 			else if(controls.RESET)
 			{
 				persistentUpdate = false;

@@ -16,10 +16,6 @@ import openfl.events.Event;
 import openfl.display.StageScaleMode;
 import lime.app.Application;
 
-#if desktop
-import Discord.DiscordClient;
-#end
-
 //crash handler stuff
 #if CRASH_HANDLER
 import openfl.events.UncaughtErrorEvent;
@@ -56,6 +52,8 @@ class Main extends Sprite
 
 	public static var fpsVar:FPS;
 
+	private var mainGame:FlxGame;
+
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
 	public static function main():Void
@@ -75,6 +73,8 @@ class Main extends Sprite
 		{
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
+
+		FlxG.signals.gameResized.add(onResizeGame);
 	}
 
 	private function init(?E:Event):Void
@@ -100,9 +100,11 @@ class Main extends Sprite
 			game.width = Math.ceil(stageWidth / game.zoom);
 			game.height = Math.ceil(stageHeight / game.zoom);
 		}
+
+		mainGame = new FlxGame(game.width, game.height, game.initialState, #if (flixel < "5.0.0") game.zoom, #end game.framerate, game.framerate, game.skipSplash, game.startFullscreen);
 	
 		ClientPrefs.loadDefaultKeys();
-		addChild(new FlxGame(game.width, game.height, game.initialState, #if (flixel < "5.0.0") game.zoom, #end game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
+		addChild(mainGame);
 
 		#if !mobile
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
@@ -176,6 +178,40 @@ class Main extends Sprite
 		Sys.exit(1);
 	}
 	#end
+
+	/**
+	* Shader Fixes when game window gets resized.
+	* 
+	* Along with some ram fixes for sprites and shit
+	*
+	* @author lunarcleint
+	*/
+	public static function onResizeGame(w:Int, h:Int) {
+		if (FlxG.cameras == null)
+			return;
+
+		for (cam in FlxG.cameras.list) {
+			@:privateAccess
+			if (cam != null && (cam._filters != null || cam._filters != []))
+				fixShaderSize(cam);
+		}	
+	}
+
+	static function fixShaderSize(camera:FlxCamera) // Shout out to Ne_Eo for bringing this to my attention
+	{
+		@:privateAccess {
+			var sprite:Sprite = camera.flashSprite;
+
+			if (sprite != null)
+			{
+				sprite.__cacheBitmap = null;
+				sprite.__cacheBitmapData = null;
+				sprite.__cacheBitmapData2 = null;
+				sprite.__cacheBitmapData3 = null;
+				sprite.__cacheBitmapColorTransform = null;
+			}
+		}
+	}
 
 	/**
 	 * Checks to see if some FlxObject overlaps this FlxObject or FlxGroup. 

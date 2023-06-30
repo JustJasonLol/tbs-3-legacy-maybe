@@ -1,6 +1,6 @@
 package funkin.substates;
 
-import Controls.Control;
+import data.Controls.Control;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
@@ -255,7 +255,7 @@ class PauseSubState extends MusicBeatSubstate
 					funkin.game.PlayState.deathCounter = 0;
 					funkin.game.PlayState.seenCutscene = false;
 
-					WeekData.loadTheFirstEnabledMod();
+					data.WeekData.loadTheFirstEnabledMod();
 					if(funkin.game.PlayState.isStoryMode) {
 						MusicBeatState.switchState(new funkin.menus.StoryMenuState());
 					} else {

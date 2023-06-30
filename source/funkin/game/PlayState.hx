@@ -1,9 +1,7 @@
 package funkin.game;
 
+import data.WeekData;
 #if !marco import flixel.graphics.FlxGraphic; #end
-#if desktop
-import Discord.DiscordClient;
-#end
 import Section.SwagSection;
 import Song.SwagSong;
 import flixel.FlxBasic;
@@ -49,7 +47,7 @@ import editors.ChartingState;
 import editors.CharacterEditorState;
 import flixel.group.FlxSpriteGroup;
 import flixel.input.keyboard.FlxKey;
-import Note.EventNote;
+import data.notes.Note.EventNote;
 import openfl.events.KeyboardEvent;
 import flixel.effects.particles.FlxEmitter;
 import flixel.effects.particles.FlxParticle;
@@ -58,11 +56,17 @@ import flixel.animation.FlxAnimationController;
 import animateatlas.AtlasFrameMaker;
 import Achievements;
 import StageData;
-import FunkinLua;
+import funkin.utils.HealthIcon;
+import funkin.FunkinLua;
 import DialogueBoxPsych;
-import Conductor.Rating;
+import data.Conductor.Rating;
 import funkin.game.PhillyGlow;
 import funkin.substates.PauseSubState;
+import data.objects.*;
+import data.objects.BGSprite;
+import funkin.game.*;
+import data.notes.*;
+import data.Conductor;
 
 #if !flash 
 import flixel.addons.display.FlxRuntimeShader;
@@ -190,7 +194,7 @@ class PlayState extends MusicBeatState
 	public var health:Float = 1;
 	public var combo:Int = 0;
 
-	private var healthBarBG:AttachedSprite;
+	public var healthBarBG:AttachedSprite;
 	public var healthBar:FlxBar;
 	public var actualBar:FlxSprite;
 	var songPercent:Float = 0;
@@ -339,14 +343,29 @@ class PlayState extends MusicBeatState
 	// stores the last combo score objects in an array
 	public static var lastScore:Array<FlxSprite> = [];
 
+	// shaders
+	public static var chromZoomShader:FlxRuntimeShader = new FlxRuntimeShader(File.getContent('./mods/shaders/aberration.frag'), null, 150);
+	public static var monitorFilter:FlxRuntimeShader = new FlxRuntimeShader(File.getContent('./mods/shaders/monitor.frag'), null, 140);
+	public static var andromeda:FlxRuntimeShader = new FlxRuntimeShader(sys.io.File.getContent('./mods/shaders/andromedaShader.frag'), null, 140);
+	public static var _1980_vhs:FlxRuntimeShader = new FlxRuntimeShader(sys.io.File.getContent('./mods/shaders/1980_shader.frag'), null, 140);
+	public static var blurShader:FlxRuntimeShader = new FlxRuntimeShader(File.getContent('./mods/shaders/blur.frag'), null, 120);
+	var shaderTime:Float = 0;
+
+	public var chromValue:Float = 0.0001;
+	public var blurValue:Float = 0.001;
+
 	// Mid song events stuff
 	var spaceWarning:FlxSprite;
 	var dodgeTimer:Float = 0;
 	var allowDodge:Bool = false;
 	var hasDodged:Bool = false;
 
+	public var healthDrain:Bool = false;
+	public var healthDrainMultipler:Float = 1;
+
 	// HARDCODED Events
 	var invadeEvents:InvadeEvents;
+	var evaporateEvents:EvaporateEvents;
 
 	override public function create()
 	{
@@ -1149,7 +1168,7 @@ class PlayState extends MusicBeatState
 		add(healthBarBG);
 		if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
 
-		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
+		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, (SONG.song.toLowerCase() == "paralyzed" ? LEFT_TO_RIGHT : RIGHT_TO_LEFT), Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
 		// healthBar
@@ -1426,6 +1445,10 @@ class PlayState extends MusicBeatState
 				invadeEvents = new InvadeEvents();
 				invadeEvents.createObjects();
 
+			case 'evaporate': 
+				evaporateEvents = new EvaporateEvents();
+				evaporateEvents.create();
+
 			default: //nothing lmao
 		}
 	}
@@ -1544,8 +1567,12 @@ class PlayState extends MusicBeatState
 	}
 
 	public function reloadHealthBarColors() {
-		healthBar.createFilledBar(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
-			FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
+		healthBar.createFilledBar(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]), FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
+		if(SONG.song.toLowerCase() == "paralyzed") 
+			{
+				iconP1.flipX = true;
+				iconP2.flipX = true;
+			}
 
 		healthBar.updateBar();
 	}
@@ -2907,11 +2934,6 @@ class PlayState extends MusicBeatState
 		}*/
 		callOnLuas('onUpdate', [elapsed]);
 
-		if(SONG.song.toLowerCase() == "hydrophobia")
-			{
-				FlxTween.shake(iconP2, 0.005, 1);
-			}
-
 		// coolest easter egg in fnf
 		if(SONG.song.toLowerCase().replace('-', ' ') == "steep slopes")
 			{
@@ -2924,6 +2946,23 @@ class PlayState extends MusicBeatState
 					{
 						FlxG.openURL('https://www.ebay.com/itm/234056755363');
 					}
+			}
+
+		if(ClientPrefs.shaders)
+			{
+				shaderTime += elapsed;
+
+				chromZoomShader.setFloat('aberration', chromValue);
+				chromZoomShader.setFloat('effectTime', chromValue);
+
+				andromeda.setFloat('iTime', shaderTime);
+				andromeda.setFloat('glitchModifier', 0.001);
+				andromeda.setBool('perspectiveOn', true);
+				andromeda.setBool('vignetteMoving', true);
+
+				_1980_vhs.setFloat('iTime', shaderTime);
+
+				blurShader.setFloat('bluramount', blurValue);
 			}
 
 		switch (curStage)
@@ -3126,21 +3165,79 @@ class PlayState extends MusicBeatState
 
 		var iconOffset:Int = 26;
 
-		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
-		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
+		if(SONG.song.toLowerCase() == "paralyzed")
+			{
+				iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 100, 0, 100, 0) * 0.01)) - (150 * iconP1.scale.x) / 2 - iconOffset * 2;
+				iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 100, 0, 100, 0) * 0.01)) + (150 * iconP2.scale.x - 150) / 2 - iconOffset;
+			} else {
+				iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
+				iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
+			}
 
 		if (health > 2)
 			health = 2;
 
-		if (healthBar.percent < 20)
-			iconP1.animation.curAnim.curFrame = 1;
-		else
-			iconP1.animation.curAnim.curFrame = 0;
+		if (SONG.song.toLowerCase() == "paralyzed")
+			{				
+				if (healthBar.percent < 20)
+					iconP1.animation.curAnim.curFrame = 2;
+				else if (healthBar.percent > 80)
+					iconP2.animation.curAnim.curFrame = 1;
+				else {
+					iconP2.animation.curAnim.curFrame = 0;
+					iconP1.animation.curAnim.curFrame = 0;
+				}
+			}
+			else if(SONG.song.toLowerCase() == "hydrophobia")
+				{
+					if (healthBar.percent < 20) {
+						iconP1.animation.curAnim.curFrame = 1;
+						iconP2.animation.curAnim.curFrame = 1;
+					} else {
+						iconP1.animation.curAnim.curFrame = 0;
+						iconP2.animation.curAnim.curFrame = 0;
+					}
+				}
+			else
+				{
+				if (healthBar.percent > 80)
+					iconP2.animation.curAnim.curFrame = 2;
+				else if (healthBar.percent < 20)
+					iconP1.animation.curAnim.curFrame = 1;
+				else {
+					iconP1.animation.curAnim.curFrame = 0;
+					iconP2.animation.curAnim.curFrame = 0;
+				}
+			}
 
-		if (healthBar.percent > 80)
-			iconP2.animation.curAnim.curFrame = 1;
-		else
-			iconP2.animation.curAnim.curFrame = 0;
+		var shakeMultipler:Float = 1;
+
+		if(SONG.song.toLowerCase() == "hydrophobia")
+			{
+				healthDrain = true;
+
+				if (healthBar.percent > 60 && healthBar.percent < 80)
+					{
+						shakeMultipler = 4.5;
+						healthDrainMultipler = 1.5;
+					} else if (healthBar.percent > 80) {
+						shakeMultipler = 7;
+						healthDrainMultipler = 1.7;
+					} else if (healthBar.percent > 20 && healthBar.percent < 40) {
+						shakeMultipler = 1;
+						healthDrainMultipler = 0.7;
+					} else if(healthBar.percent < 20) {
+						shakeMultipler = 0.1;
+						healthDrainMultipler = 0.4;
+					} else {
+						shakeMultipler = 1;
+						healthDrainMultipler = 1;
+					}
+					
+				iconP2.offset.x = FlxG.random.float(-0.006 * (shakeMultipler * 10), 0.006 * (shakeMultipler * 10));
+				iconP2.offset.y = FlxG.random.float(-0.006 * (shakeMultipler * 10), 0.006 * (shakeMultipler * 10));
+				iconP2.angle = FlxG.random.float(-3 * (shakeMultipler * 0.7), 3 * (shakeMultipler * 0.7));
+			}
 
 		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene) {
 			persistentUpdate = false;
@@ -4702,8 +4799,7 @@ class PlayState extends MusicBeatState
 
 	function opponentNoteHit(note:Note):Void
 	{
-		if (Paths.formatToSongPath(SONG.song) != 'tutorial')
-			camZooming = true;
+		camZooming = true;
 
 		if(note.noteType == 'Hey!' && dad.animOffsets.exists('hey')) {
 			dad.playAnim('hey', true);
@@ -4743,6 +4839,10 @@ class PlayState extends MusicBeatState
 		note.hitByOpponent = true;
 
 		callOnLuas('opponentNoteHit', [notes.members.indexOf(note), Math.abs(note.noteData), note.noteType, note.isSustainNote]);
+
+		if(healthDrain)
+			if(health > (0.023 * healthDrainMultipler))
+				health -= note.hitHealth * healthDrainMultipler;
 
 		if (!note.isSustainNote)
 		{
@@ -5180,6 +5280,8 @@ class PlayState extends MusicBeatState
 					{
 						FlxG.game.setFilters([new ShaderFilter(InvadeEvents.bloom0_0), new ShaderFilter(InvadeEvents.coolShader)]);
 					}
+			} else if(SONG.song.toLowerCase() == "evaporate") {
+				evaporateEvents.beatHitEvents(curBeat);
 			}
 
 		switch (curStage)

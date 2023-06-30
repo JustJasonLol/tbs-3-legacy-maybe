@@ -1,9 +1,7 @@
 package funkin.menus;
 
 import flixel.tweens.FlxEase;
-#if desktop
-import Discord.DiscordClient;
-#end
+
 import editors.ChartingState;
 import flash.text.TextField;
 import flixel.FlxG;
@@ -18,7 +16,8 @@ import flixel.tweens.FlxTween;
 import lime.utils.Assets;
 import flixel.system.FlxSound;
 import openfl.utils.Assets as OpenFlAssets;
-import WeekData;
+import data.WeekData;
+import funkin.utils.HealthIcon;
 #if MODS_ALLOWED
 import sys.FileSystem;
 #end
@@ -71,8 +70,8 @@ class FreeplayCategory extends MusicBeatState
 		#end
 
 		addCategory('secret of nobody', 0, 'face', FlxColor.BLACK);
-      addCategory('love is hopeless', 1, 'face', FlxColor.BLACK);
-      addCategory('pibby corrupted', 2, 'face', FlxColor.BLACK);
+      	addCategory('love is hopeless', 1, 'face', FlxColor.BLACK);
+      	addCategory('pibby corrupted', 2, 'face', FlxColor.BLACK);
 		addCategory('extras', 3, 'face', FlxColor.BLACK);
 		addCategory('covers', 4, 'face', FlxColor.BLACK);
 
@@ -81,24 +80,14 @@ class FreeplayCategory extends MusicBeatState
 		add(bg);
 		bg.screenCenter();
 
-      banner = new FlxSprite().loadGraphic(Paths.image('freeplay/main_menu/$curSelected'));
-      banner.antialiasing = ClientPrefs.globalAntialiasing;
-      banner.screenCenter();
-      banner.setGraphicSize(Std.int(banner.width * 0.6));
+		banner = new FlxSprite().loadGraphic(Paths.image('freeplay/main_menu/$curSelected'));
+		banner.antialiasing = ClientPrefs.globalAntialiasing;
+		banner.screenCenter();
+		banner.setGraphicSize(Std.int(banner.width * 0.6));
 		banner.alpha = 0;
-      add(banner);
+		add(banner);
 
-		leText = new FlxText(0, -90, 0, 'Choose', 52);
-		leText.screenCenter(X);
-		leText.x += 20;
-		leText.setFormat(Paths.font('fnf_vcr.ttf'), 52, FlxColor.WHITE, CENTER, OUTLINE, FlxColor.BLACK);
-		add(leText);
-
-		FlxTween.tween(leText, {y: 20}, 2, {ease: FlxEase.elasticInOut, onComplete: function(e)
-		{
-			FlxTween.tween(banner, {alpha: 1}, 1, {ease: FlxEase.sineOut});
-		}
-	});
+		FlxTween.tween(banner, {alpha: 1}, 1, {ease: FlxEase.sineOut});
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
@@ -302,11 +291,6 @@ class FreeplayCategory extends MusicBeatState
 			MusicBeatState.switchState(new MainMenuState());
 		}
 
-		if(ctrl)
-		{
-			persistentUpdate = false;
-			openSubState(new GameplayChangersSubstate());
-		}
 		else if (accepted)
 		{
 			persistentUpdate = false;

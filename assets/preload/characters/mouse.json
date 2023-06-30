@@ -1,70 +1,70 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
 				1,
 				0
 			],
-			"fps": 24,
+			"loop": false,
 			"anim": "idle",
-			"indices": [],
-			"name": "jerry idle"
+			"fps": 24,
+			"name": "jerry idle",
+			"indices": []
 		},
 		{
-			"loop": false,
 			"offsets": [
 				55,
 				7
 			],
-			"anim": "singUP",
+			"loop": false,
 			"fps": 24,
-			"name": "jerry UP",
-			"indices": []
+			"anim": "singUP",
+			"indices": [],
+			"name": "jerry UP"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				60,
 				10
 			],
-			"anim": "singRIGHT",
+			"loop": false,
 			"fps": 24,
-			"name": "jerry RIGHT",
-			"indices": []
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "jerry RIGHT"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				46,
 				2
 			],
-			"anim": "singLEFT",
+			"loop": false,
 			"fps": 24,
-			"name": "jerry LEFT",
-			"indices": []
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "jerry LEFT"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				54,
 				5
 			],
-			"anim": "singDOWN",
+			"loop": false,
 			"fps": 24,
-			"name": "jerry DOWN",
-			"indices": []
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "jerry DOWN"
 		},
 		{
+			"loop": false,
 			"offsets": [
 				216,
 				0
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "angry",
-			"loop": false,
-			"name": "jerry angry"
+			"fps": 24,
+			"name": "jerry angry",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
@@ -81,8 +81,8 @@
 		51
 	],
 	"camera_position": [
-		-300,
-		100
+		-170,
+		50
 	],
 	"sing_duration": 4,
 	"scale": 1

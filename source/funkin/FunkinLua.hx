@@ -1,4 +1,4 @@
-package;
+package funkin;
 
 import openfl.display.BitmapData;
 #if LUA_ALLOWED
@@ -34,6 +34,7 @@ import flixel.util.FlxSave;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.system.FlxAssets.FlxShader;
 import funkin.substates.GameOverSubstate;
+import data.notes.*;
 
 #if (!flash && sys)
 import flixel.addons.display.FlxRuntimeShader;
@@ -45,17 +46,13 @@ import sys.io.File;
 #end
 
 import Type.ValueType;
-import Controls;
+import data.Controls;
 import DialogueBoxPsych;
 
 #if hscript
 import hscript.Parser;
 import hscript.Interp;
 import hscript.Expr;
-#end
-
-#if desktop
-import Discord;
 #end
 
 using StringTools;
@@ -136,7 +133,7 @@ class FunkinLua {
 		set('difficultyName', difficultyName);
 		set('difficultyPath', Paths.formatToSongPath(difficultyName));
 		set('weekRaw', funkin.game.PlayState.storyWeek);
-		set('week', WeekData.weeksList[funkin.game.PlayState.storyWeek]);
+		set('week', data.WeekData.weeksList[funkin.game.PlayState.storyWeek]);
 		set('seenCutscene', funkin.game.PlayState.seenCutscene);
 
 		// Camera poo
@@ -1553,7 +1550,7 @@ class FunkinLua {
 			funkin.game.PlayState.changedDifficulty = false;
 			funkin.game.PlayState.chartingMode = false;
 			funkin.game.PlayState.instance.transitioning = true;
-			WeekData.loadTheFirstEnabledMod();
+			data.WeekData.loadTheFirstEnabledMod();
 			return true;
 		});
 		Lua_helper.add_callback(lua, "getSongPosition", function() {

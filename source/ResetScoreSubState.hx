@@ -2,6 +2,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
 import flixel.util.FlxColor;
+import funkin.utils.HealthIcon;
 
 using StringTools;
 
@@ -29,7 +30,7 @@ class ResetScoreSubState extends MusicBeatSubstate
 
 		var name:String = song;
 		if(week > -1) {
-			name = WeekData.weeksLoaded.get(WeekData.weeksList[week]).weekName;
+			name = data.WeekData.weeksLoaded.get(data.WeekData.weeksList[week]).weekName;
 		}
 		name += ' (' + CoolUtil.difficulties[difficulty] + ')?';
 
@@ -95,7 +96,7 @@ class ResetScoreSubState extends MusicBeatSubstate
 				if(week == -1) {
 					Highscore.resetSong(song, difficulty);
 				} else {
-					Highscore.resetWeek(WeekData.weeksList[week], difficulty);
+					Highscore.resetWeek(data.WeekData.weeksList[week], difficulty);
 				}
 			}
 			FlxG.sound.play(Paths.sound('cancelMenu'), 1);

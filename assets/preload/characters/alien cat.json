@@ -1,59 +1,59 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				-95,
 				-116
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singLEFT",
-			"loop": false,
-			"name": "alien cat left"
+			"fps": 24,
+			"name": "alien cat left",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-146,
 				-127
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singDOWN",
-			"loop": false,
-			"name": "alien cat down"
+			"fps": 24,
+			"name": "alien cat down",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-19,
 				96
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singUP",
-			"loop": false,
-			"name": "alien cat up"
+			"fps": 24,
+			"name": "alien cat up",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-130,
 				42
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singRIGHT",
-			"loop": false,
-			"name": "alien cat right"
+			"fps": 24,
+			"name": "alien cat right",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "idle",
-			"loop": false,
-			"name": "alien cat idle"
+			"fps": 24,
+			"name": "alien cat idle",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
@@ -70,8 +70,8 @@
 		80
 	],
 	"camera_position": [
-		-220,
-		-250
+		50,
+		-100
 	],
 	"sing_duration": 6.1,
 	"scale": 1.3

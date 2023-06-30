@@ -1,8 +1,6 @@
 package funkin.menus;
 
-#if desktop
-import Discord.DiscordClient;
-#end
+
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -44,7 +42,6 @@ class MainMenuState extends MusicBeatState
 		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
 		#end
-		WeekData.loadTheFirstEnabledMod();
 
 		if(Data.week1Lock == "locked")
 			optionShit = ['story_mode', 'credits', 'options'];

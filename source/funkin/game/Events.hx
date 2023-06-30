@@ -1,5 +1,7 @@
 package funkin.game;
 
+import flixel.FlxBasic;
+import openfl.Lib;
 import sys.io.File;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxColor;
@@ -9,7 +11,7 @@ import flixel.FlxSprite;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 
-class InvadeEvents extends FlxTypedGroup<Dynamic>
+class InvadeEvents
 {
     public static var instance:InvadeEvents;
 
@@ -27,10 +29,7 @@ class InvadeEvents extends FlxTypedGroup<Dynamic>
 
     var gradient:FlxSprite;
 
-    public function new()
-        {
-            super();
-        }
+    public function new() {}
 
     public function createObjects():InvadeEvents
         {
@@ -41,7 +40,7 @@ class InvadeEvents extends FlxTypedGroup<Dynamic>
             text.cameras = [PlayState.instance.camOther];
             text.screenCenter(X);
             text.x -= 60;
-            add(text);
+            PlayState.instance.add(text);
 
             blackSprite = new FlxSprite().makeGraphic(FlxG.width * 5, FlxG.height * 5, FlxColor.BLACK);
             blackSprite.screenCenter();
@@ -183,5 +182,127 @@ class InvadeEvents extends FlxTypedGroup<Dynamic>
         {
             text.x = (isMinus ? text.x-xMove : text.x+xMove);
             return text.text = string;
+        }
+}
+
+class EvaporateEvents 
+{
+    var blackBackground:FlxSprite;
+
+    var objects:Array<FlxBasic> =
+    [
+        PlayState.instance.healthBar,
+        PlayState.instance.healthBarBG,
+        PlayState.instance.actualBar,
+        PlayState.instance.scoreTxt,
+        PlayState.instance.iconP1,
+        PlayState.instance.iconP2
+    ];
+
+    public function new() {}
+    
+    public function create() 
+    {
+        blackBackground = new FlxSprite(-400).makeGraphic(FlxG.width * 5, FlxG.height * 5, FlxColor.BLACK);
+        blackBackground.alpha = 0;
+        PlayState.instance.addBehindDad(blackBackground);
+
+        PlayState.instance.camZooming = true;
+
+        if(ClientPrefs.shaders) {
+            FlxG.game.setFilters([new ShaderFilter(PlayState._1980_vhs)]);
+        }
+    }
+
+    var e:FlxTween;
+
+    var _:FlxText;
+    
+    public function beatHitEvents(curBeat:Int)
+        {
+            switch(curBeat)
+            {
+                case 62:
+                    PlayState.instance.camZooming = false;
+                    PlayState.instance.camGame.zoom = 1;
+
+                case 63: PlayState.instance.camGame.zoom = 1.1;
+
+                case 64:
+                    PlayState.instance.healthDrain = true;
+                    PlayState.instance.healthDrainMultipler = 0.7;
+
+                case 128: 
+                    PlayState.instance.healthDrain = false;
+                    PlayState.instance.defaultCamZoom = 1.17;
+
+                    if(ClientPrefs.shaders) {
+                        
+                        PlayState.instance.camGame.setFilters([
+                        new ShaderFilter(PlayState._1980_vhs), 
+                        new ShaderFilter(PlayState.chromZoomShader), 
+                        new ShaderFilter(PlayState.monitorFilter), 
+                    ]);
+
+                    FlxG.game.setFilters([new ShaderFilter(PlayState.blurShader)]);
+                }
+
+                    for(objectArray in objects)
+                    {
+                        FlxTween.tween(objectArray, {alpha: 0}, 1.3, {ease: FlxEase.expoOut});
+                    }
+                    FlxTween.tween(blackBackground, {alpha: 0.7}, 1, {ease: FlxEase.expoOut});
+
+                case 188: 
+                    e = FlxTween.tween(PlayState.instance, {chromValue: 1}, 2);
+                    FlxTween.tween(PlayState.instance, {camGame: 0.4}, 1);
+                    FlxTween.tween(PlayState.instance, {blurValue: 1.8}, 2);
+
+                case 192: 
+                    PlayState.instance.defaultCamZoom = 1.26;
+                    FlxTween.tween(blackBackground, {alpha: 0.9}, 1, {ease: FlxEase.expoOut});
+                    PlayState.instance.boyfriend.cameraPosition[0] -= 185;
+                    if(e != null) e.cancel();
+                    PlayState.instance.chromValue = 0.0001;
+
+                    for(i in 0...PlayState.instance.opponentStrums.length)
+                        FlxTween.tween(PlayState.instance.opponentStrums.members[i], {alpha: 0}, 1);
+
+                case 224: 
+                    FlxTween.tween(PlayState.instance, {blurValue: 0.001}, 10);
+
+                case 256: 
+                    for(objectArray in objects)
+                        {
+                            FlxTween.tween(objectArray, {alpha: 1}, 1.3, {ease: FlxEase.expoOut});
+                        }
+                        FlxTween.tween(blackBackground, {alpha: 0}, 1, {ease: FlxEase.expoOut});
+
+                    for(i in 0...PlayState.instance.opponentStrums.length)
+                        FlxTween.tween(PlayState.instance.opponentStrums.members[i], {alpha: 1}, 1);
+
+                    PlayState.instance.boyfriend.cameraPosition[0] += 185;
+
+                    PlayState.instance.healthDrain = true;
+                    PlayState.instance.healthDrainMultipler = 1.1;
+
+                    PlayState.instance.defaultCamZoom = 0.9;
+
+                case 319: PlayState.instance.defaultCamZoom = 1.2;
+
+                case 320: PlayState.instance.defaultCamZoom = 1;
+                _ = new FlxText(0, 0, FlxG.width, 'imagine that something cool happends', 32);
+                _.setFormat(Paths.font('fnf_vcr.ttf'), 30, FlxColor.WHITE, CENTER, OUTLINE, FlxColor.BLACK);
+                _.cameras = [PlayState.instance.camOther];
+                _.screenCenter(XY);
+                _.y += 180;
+                PlayState.instance.add(_);
+
+                case 385: 
+                    PlayState.instance.camHUD.angle = 0;
+                    Main.onResizeGame(FlxG.width, FlxG.height);
+                    PlayState.instance.defaultCamZoom = 0.9;
+                    PlayState.instance.remove(_);
+            }
         }
 }

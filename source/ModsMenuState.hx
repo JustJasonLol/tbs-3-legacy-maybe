@@ -1,8 +1,6 @@
 package;
 
-#if desktop
-import Discord.DiscordClient;
-#end
+
 import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -68,7 +66,7 @@ class ModsMenuState extends MusicBeatState
 	{
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
-		WeekData.setDirectoryFromWeek();
+		data.WeekData.setDirectoryFromWeek();
 
 		#if desktop
 		// Updating Discord Rich Presence

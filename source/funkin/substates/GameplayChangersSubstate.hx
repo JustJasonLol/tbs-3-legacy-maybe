@@ -1,8 +1,6 @@
-package;
+package funkin.substates;
 
-#if desktop
-import Discord.DiscordClient;
-#end
+
 import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -23,7 +21,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
-import Controls;
+import data.Controls;
 
 using StringTools;
 

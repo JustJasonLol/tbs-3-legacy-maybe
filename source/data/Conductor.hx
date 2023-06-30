@@ -1,11 +1,6 @@
-package;
+package data;
 
 import Song.SwagSong;
-
-/**
- * ...
- * @author
- */
 
 typedef BPMChangeEvent =
 {
@@ -33,7 +28,7 @@ class Conductor
 	{
 	}
 
-	public static function judgeNote(note:Note, diff:Float=0):Rating // die
+	public static function judgeNote(note:data.notes.Note, diff:Float=0):Rating // die
 	{
 		var data:Array<Rating> = funkin.game.PlayState.instance.ratingsData; //shortening cuz fuck u
 		for(i in 0...data.length-1) //skips last window (Shit)

@@ -113,7 +113,7 @@ class GameOverSubstate extends MusicBeatSubstate
 			funkin.game.PlayState.seenCutscene = false;
 			funkin.game.PlayState.chartingMode = false;
 
-			WeekData.loadTheFirstEnabledMod();
+			data.WeekData.loadTheFirstEnabledMod();
 			if (funkin.game.PlayState.isStoryMode)
 				MusicBeatState.switchState(new funkin.menus.StoryMenuState());
 			else

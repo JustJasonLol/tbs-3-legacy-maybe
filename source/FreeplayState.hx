@@ -1,8 +1,6 @@
 package;
 
-#if desktop
-import Discord.DiscordClient;
-#end
+
 import editors.ChartingState;
 import flash.text.TextField;
 import flixel.FlxG;
@@ -17,7 +15,8 @@ import flixel.tweens.FlxTween;
 import lime.utils.Assets;
 import flixel.system.FlxSound;
 import openfl.utils.Assets as OpenFlAssets;
-import WeekData;
+import data.WeekData;
+import funkin.utils.HealthIcon;
 #if MODS_ALLOWED
 import sys.FileSystem;
 #end
@@ -363,12 +362,6 @@ class FreeplayState extends MusicBeatState
 				FlxG.sound.playMusic(Paths.inst(funkin.game.PlayState.SONG.song), 0.7);
 				instPlaying = curSelected;
 				#end
-		}
-		
-		if(ctrl)
-		{
-			persistentUpdate = false;
-			openSubState(new GameplayChangersSubstate());
 		}
 
 		else if (accepted)

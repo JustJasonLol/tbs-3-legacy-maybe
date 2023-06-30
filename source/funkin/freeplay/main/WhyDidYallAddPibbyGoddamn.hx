@@ -7,9 +7,7 @@ import sys.io.File;
 #end
 import flixel.FlxSprite;
 import flixel.FlxG;
-#if desktop
-import Discord.DiscordClient;
-#end
+
 
 class WhyDidYallAddPibbyGoddamn extends MusicBeatState
 {

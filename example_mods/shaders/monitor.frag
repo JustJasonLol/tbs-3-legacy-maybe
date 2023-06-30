@@ -1,4 +1,10 @@
+// Automatically converted with ShadertoyToFlixel.js
+
 #pragma header
+
+vec2 fragCoord = openfl_TextureCoordv*openfl_TextureSize;
+vec2 iResolution = openfl_TextureSize;
+uniform float iTime;
 
 float zoom = 1;
 void main()
@@ -12,9 +18,9 @@ void main()
     uv = (uv + 1.)*.5;
     
     vec4 tex = vec4( 
-        texture2D(bitmap, uv+.001).r,
-        texture2D(bitmap, uv).g,
-        texture2D(bitmap, uv-.001).b, 
+        flixel_texture2D(bitmap, uv+.001).r,
+        flixel_texture2D(bitmap, uv).g,
+        flixel_texture2D(bitmap, uv-.001).b, 
         1.0
     );
     

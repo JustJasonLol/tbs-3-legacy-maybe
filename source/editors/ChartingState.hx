@@ -1,13 +1,10 @@
 package editors;
 
-#if desktop
-import Discord.DiscordClient;
-#end
 import flash.geom.Rectangle;
 import haxe.Json;
 import haxe.format.JsonParser;
 import haxe.io.Bytes;
-import Conductor.BPMChangeEvent;
+import data.Conductor.BPMChangeEvent;
 import Section.SwagSection;
 import Song.SwagSong;
 import flixel.FlxG;
@@ -46,6 +43,9 @@ import openfl.media.Sound;
 import openfl.net.FileReference;
 import openfl.utils.Assets as OpenFlAssets;
 import openfl.utils.ByteArray;
+import data.objects.AttachedSprite;
+import funkin.utils.HealthIcon;
+import data.notes.*;
 
 using StringTools;
 #if sys
@@ -2190,6 +2190,7 @@ class ChartingState extends MusicBeatState
 		var st:Float = sectionStartTime();
 		var et:Float = st + (Conductor.stepCrochet * steps);
 
+		@:privateAccess {
 		if (FlxG.save.data.chart_waveformInst) {
 			var sound:FlxSound = FlxG.sound.music;
 			if (sound._sound != null && sound._sound.__buffer != null) {
@@ -2223,6 +2224,7 @@ class ChartingState extends MusicBeatState
 				);
 			}
 		}
+	}
 
 		// Draws
 		var gSize:Int = Std.int(GRID_SIZE * 8);
