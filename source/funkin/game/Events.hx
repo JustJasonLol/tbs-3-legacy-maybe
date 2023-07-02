@@ -210,7 +210,7 @@ class EvaporateEvents
         PlayState.instance.camZooming = true;
 
         if(ClientPrefs.shaders) {
-            FlxG.game.setFilters([new ShaderFilter(PlayState._1980_vhs)]);
+            PlayState.instance.camGame.setFilters([new ShaderFilter(PlayState._1980_vhs)]);
         }
     }
 
@@ -237,14 +237,11 @@ class EvaporateEvents
                     PlayState.instance.defaultCamZoom = 1.17;
 
                     if(ClientPrefs.shaders) {
-                        
                         PlayState.instance.camGame.setFilters([
                         new ShaderFilter(PlayState._1980_vhs), 
                         new ShaderFilter(PlayState.chromZoomShader), 
-                        new ShaderFilter(PlayState.monitorFilter), 
+                        new ShaderFilter(PlayState.blurShader)
                     ]);
-
-                    FlxG.game.setFilters([new ShaderFilter(PlayState.blurShader)]);
                 }
 
                     for(objectArray in objects)
@@ -263,7 +260,7 @@ class EvaporateEvents
                     FlxTween.tween(blackBackground, {alpha: 0.9}, 1, {ease: FlxEase.expoOut});
                     PlayState.instance.boyfriend.cameraPosition[0] -= 185;
                     if(e != null) e.cancel();
-                    PlayState.instance.chromValue = 0.0001;
+                    e = FlxTween.tween(PlayState.instance, {chromValue: 0.001}, 1, {onComplete: _->e = null});
 
                     for(i in 0...PlayState.instance.opponentStrums.length)
                         FlxTween.tween(PlayState.instance.opponentStrums.members[i], {alpha: 0}, 1);
@@ -291,18 +288,6 @@ class EvaporateEvents
                 case 319: PlayState.instance.defaultCamZoom = 1.2;
 
                 case 320: PlayState.instance.defaultCamZoom = 1;
-                _ = new FlxText(0, 0, FlxG.width, 'imagine that something cool happends', 32);
-                _.setFormat(Paths.font('fnf_vcr.ttf'), 30, FlxColor.WHITE, CENTER, OUTLINE, FlxColor.BLACK);
-                _.cameras = [PlayState.instance.camOther];
-                _.screenCenter(XY);
-                _.y += 180;
-                PlayState.instance.add(_);
-
-                case 385: 
-                    PlayState.instance.camHUD.angle = 0;
-                    Main.onResizeGame(FlxG.width, FlxG.height);
-                    PlayState.instance.defaultCamZoom = 0.9;
-                    PlayState.instance.remove(_);
             }
         }
 }

@@ -1,5 +1,20 @@
 package global;
 
+// stuff for less ram use
+#if cpp
+import cpp.NativeGc;
+import cpp.vm.Gc;
+#elseif hl
+import hl.Gc;
+#elseif java
+import java.vm.Gc;
+#elseif neko
+import neko.vm.Gc;
+#end
+import openfl.system.System;
+import openfl.utils.AssetCache;
+import openfl.Assets;
+
 import flixel.FlxCamera;
 import flixel.FlxBasic;
 #if !marco
@@ -75,6 +90,18 @@ class Main extends Sprite
 		}
 
 		FlxG.signals.gameResized.add(onResizeGame);
+
+		#if desktop
+		Gc.enable(true);
+		#end
+
+		FlxG.signals.postStateSwitch.add(()->{
+			optimizeGame(true);
+		});
+		FlxG.signals.preStateSwitch.add(()-> {
+			optimizeGame(false);
+		});
+		FlxG.signals.focusLost.add(()->gc()); // they don't know
 	}
 
 	private function init(?E:Event):Void
@@ -238,7 +265,7 @@ class Main extends Sprite
 	 * @param ObjectOrGroup The object or group being tested.
 	 * @param Camera Specify which game camera you want. If null getScreenPosition() will just grab the first global camera.
 	 */
-	public static function mouseOverlaps(spr:Dynamic, mousePos:flixel.math.FlxPoint):Bool
+	var mouseOverlaps = function(spr:Dynamic, mousePos:flixel.math.FlxPoint):Bool
 		{
 			if (mousePos.x >= (spr.x - spr.offset.x)
 				&& mousePos.x < (spr.x - spr.offset.x + spr.width)
@@ -251,4 +278,58 @@ class Main extends Sprite
 			//sad
 			return false;
 		}
+
+	public static function optimizeGame(post:Bool = false)
+		{
+			if(!post)
+				{
+					Paths.clearStoredMemory(true);
+					Paths.clearUnusedMemory();
+					FlxG.bitmap.dumpCache();
+					
+					gc();
+		
+					var cache = cast(Assets.cache, AssetCache);
+					for (key=>font in cache.font)
+						{
+							cache.removeFont(key); 
+							trace('removed font $key');
+						}
+					for (key=>sound in cache.sound)
+						{
+							cache.removeSound(key); 
+							trace('removed sound $key');
+						}
+					cache = null;
+				} else {
+					Paths.clearUnusedMemory();
+					openfl.Assets.cache.clear('assets/songs');
+					openfl.Assets.cache.clear('assets/preload/data');
+					openfl.Assets.cache.clear('assets/shared/images');
+					openfl.Assets.cache.clear('assets/shared/sounds');
+					openfl.Assets.cache.clear('assets/shared/music');
+					openfl.Assets.cache.clear('assets/shaders');
+					openfl.Assets.cache.clear('assets/fonts');
+					openfl.Assets.cache.clear('assets/preload/images');
+					openfl.Assets.cache.clear('assets/preload/music');
+					openfl.Assets.cache.clear('assets/videos');
+					gc();
+					trace(Math.abs(System.totalMemory / 1000000));
+				}
+		}
+	
+	public static function gc() {
+		trace("Huh");
+
+		#if cpp
+		NativeGc.compact();
+		NativeGc.run(true);
+		#elseif hl
+		Gc.major();
+		#elseif (java || neko)
+		Gc.run(true);
+		#else
+		openfl.system.System.gc();
+		#end
+	}
 }
