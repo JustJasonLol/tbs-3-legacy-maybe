@@ -217,6 +217,8 @@ class EvaporateEvents
     var e:FlxTween;
 
     var _:FlxText;
+
+    var __:FlxSprite;
     
     public function beatHitEvents(curBeat:Int)
         {
@@ -240,8 +242,9 @@ class EvaporateEvents
                         PlayState.instance.camGame.setFilters([
                         new ShaderFilter(PlayState._1980_vhs), 
                         new ShaderFilter(PlayState.chromZoomShader), 
-                        new ShaderFilter(PlayState.blurShader)
                     ]);
+
+                    FlxG.game.setFilters([new ShaderFilter(PlayState.blurShader)]);
                 }
 
                     for(objectArray in objects)
@@ -287,7 +290,11 @@ class EvaporateEvents
 
                 case 319: PlayState.instance.defaultCamZoom = 1.2;
 
-                case 320: PlayState.instance.defaultCamZoom = 1;
+                case 320: 
+                    PlayState.instance.defaultCamZoom = 1;
+
+                case 383: 
+                    PlayState.instance.defaultCamZoom = 0.9;
             }
         }
 }

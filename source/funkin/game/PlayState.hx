@@ -887,6 +887,11 @@ class PlayState extends MusicBeatState
 			case 'alien': // Invade 
 				alienBG = new BGSprite('alien', -600, 30);
 				add(alienBG);
+
+			case 'dro': // the song of droopy killing himself on 2017	
+				var WHY_IS_ALL_THE_STUFF_IN_ONE_IMAGE:FlxSprite = new FlxSprite(-890, -440, Paths.image('dro bg'));
+				WHY_IS_ALL_THE_STUFF_IN_ONE_IMAGE.scrollFactor.set(1.1, 1.1); // why
+				add(WHY_IS_ALL_THE_STUFF_IN_ONE_IMAGE);
 		}
 
 		switch(Paths.formatToSongPath(SONG.song))
@@ -1073,7 +1078,7 @@ class PlayState extends MusicBeatState
 
 		var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
 		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
-		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		timeTxt.setFormat(Paths.font((SONG.song.toLowerCase() == "faded" ? 'fnf_vcr.ttf' : "vcr.ttf")), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		timeTxt.scrollFactor.set();
 		timeTxt.alpha = 0;
 		timeTxt.borderSize = 2;
@@ -1180,7 +1185,7 @@ class PlayState extends MusicBeatState
 		actualBar = new FlxSprite(healthBarBG.x, ClientPrefs.downScroll ? healthBarBG.y = 0.11 * FlxG.height : FlxG.height * 0.89);
 		actualBar.loadGraphic(Paths.image('healthBar'));
 		actualBar.screenCenter(X);
-		actualBar.visible = !ClientPrefs.hideHud;
+		actualBar.visible = (SONG.song.toLowerCase() == "faded" ? false : !ClientPrefs.hideHud);
 		actualBar.cameras = [camHUD];
 		insert(members.indexOf(healthBar) + 1, actualBar);
 
@@ -1198,7 +1203,7 @@ class PlayState extends MusicBeatState
 		reloadHealthBarColors();
 
 		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreTxt.setFormat(Paths.font((SONG.song.toLowerCase() == "faded" ? 'fnf_vcr.ttf' : "vcr.ttf")), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.hideHud;
@@ -2232,49 +2237,6 @@ class PlayState extends MusicBeatState
 				switch (swagCounter)
 				{
 					case 0:
-						FlxG.sound.play(Paths.sound('intro3' + introSoundsSuffix), 0.6);
-					case 1:
-						countdownReady = new FlxSprite().loadGraphic(Paths.image(introAlts[0]));
-						countdownReady.cameras = [camHUD];
-						countdownReady.scrollFactor.set();
-						countdownReady.updateHitbox();
-
-						if (funkin.game.PlayState.isPixelStage)
-							countdownReady.setGraphicSize(Std.int(countdownReady.width * daPixelZoom));
-
-						countdownReady.screenCenter();
-						countdownReady.antialiasing = antialias;
-						insert(members.indexOf(notes), countdownReady);
-						FlxTween.tween(countdownReady, {/*y: countdownReady.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
-							ease: FlxEase.cubeInOut,
-							onComplete: function(twn:FlxTween)
-							{
-								remove(countdownReady);
-								countdownReady.destroy();
-							}
-						});
-						FlxG.sound.play(Paths.sound('intro2' + introSoundsSuffix), 0.6);
-					case 2:
-						countdownSet = new FlxSprite().loadGraphic(Paths.image(introAlts[1]));
-						countdownSet.cameras = [camHUD];
-						countdownSet.scrollFactor.set();
-
-						if (funkin.game.PlayState.isPixelStage)
-							countdownSet.setGraphicSize(Std.int(countdownSet.width * daPixelZoom));
-
-						countdownSet.screenCenter();
-						countdownSet.antialiasing = antialias;
-						insert(members.indexOf(notes), countdownSet);
-						FlxTween.tween(countdownSet, {/*y: countdownSet.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
-							ease: FlxEase.cubeInOut,
-							onComplete: function(twn:FlxTween)
-							{
-								remove(countdownSet);
-								countdownSet.destroy();
-							}
-						});
-						FlxG.sound.play(Paths.sound('intro1' + introSoundsSuffix), 0.6);
-					case 3:
 						countdownGo = new FlxSprite().loadGraphic(Paths.image(introAlts[2]));
 						countdownGo.cameras = [camHUD];
 						countdownGo.scrollFactor.set();
@@ -2287,6 +2249,7 @@ class PlayState extends MusicBeatState
 						countdownGo.screenCenter();
 						countdownGo.antialiasing = antialias;
 						insert(members.indexOf(notes), countdownGo);
+						countdownGo.alpha = 0;
 						FlxTween.tween(countdownGo, {/*y: countdownGo.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
 							ease: FlxEase.cubeInOut,
 							onComplete: function(twn:FlxTween)
@@ -2295,8 +2258,8 @@ class PlayState extends MusicBeatState
 								countdownGo.destroy();
 							}
 						});
-						FlxG.sound.play(Paths.sound('introGo' + introSoundsSuffix), 0.6);
-					case 4:
+						FlxG.sound.play(Paths.sound('introGo' + introSoundsSuffix), 0.0001);
+					case 1:
 				}
 
 				notes.forEachAlive(function(note:Note) {
@@ -2313,7 +2276,7 @@ class PlayState extends MusicBeatState
 
 				swagCounter += 1;
 				// generateSong('fresh');
-			}, 5);
+			}, 1);
 		}
 	}
 
@@ -2367,10 +2330,22 @@ class PlayState extends MusicBeatState
 
 	public function updateScore(miss:Bool = false)
 	{
-		scoreTxt.text = 'Score: ' + songScore
-		+ ' - Combo Breaks: ' + songMisses
-		+ ' - Rank: ' + '$ratingName'
-		+ (ratingName != '?' ? ' [${Highscore.floorDecimal(ratingPercent * 100, 2)}%]' : '');
+		switch (SONG.song.toLowerCase().replace('-', ' '))
+		{
+			case 'faded': 
+				scoreTxt.text = 'Score: ' + songScore
+				+ ' | Combo Breaks: ' + songMisses
+				+ ' | Accuracy: ' + '${Highscore.floorDecimal(ratingPercent * 100, 2)}%'
+				+ (ratingName != '?' ? ' [$ratingFC]' : '');
+
+				scoreTxt.color = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
+
+			default: 
+				scoreTxt.text = 'Score: ' + songScore
+				+ ' - Combo Breaks: ' + songMisses
+				+ ' - Rank: ' + '$ratingName'
+				+ (ratingName != '?' ? ' [${Highscore.floorDecimal(ratingPercent * 100, 2)}%]' : '');
+		}
 
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
 		{

@@ -3,7 +3,7 @@
 		{
 			"loop": false,
 			"offsets": [
-				24,
+				21,
 				3
 			],
 			"fps": 20,
@@ -14,8 +14,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				-115,
-				-186
+				-95,
+				287
 			],
 			"anim": "singUP",
 			"fps": 24,
@@ -25,8 +25,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				12,
-				6
+				-8,
+				403
 			],
 			"anim": "singRIGHT",
 			"fps": 24,
@@ -36,8 +36,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				-121,
-				-192
+				-48,
+				358
 			],
 			"anim": "singLEFT",
 			"fps": 36,
@@ -48,7 +48,7 @@
 			"loop": false,
 			"offsets": [
 				-107,
-				-185
+				258
 			],
 			"anim": "singDOWN",
 			"fps": 24,
@@ -57,8 +57,8 @@
 		},
 		{
 			"offsets": [
-				21,
-				-296
+				54,
+				174
 			],
 			"loop": false,
 			"fps": 36,
@@ -68,10 +68,10 @@
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/MOUSE PH2",
+	"image": "characters/MOUSE_PH2",
 	"position": [
-		-40,
-		120
+		-250,
+		230
 	],
 	"healthicon": "mouse-p2",
 	"flip_x": false,
@@ -85,5 +85,5 @@
 		-260
 	],
 	"sing_duration": 6.99999999999999,
-	"scale": 1.9
+	"scale": 1.1
 }

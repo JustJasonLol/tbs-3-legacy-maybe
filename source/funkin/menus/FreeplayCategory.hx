@@ -62,6 +62,7 @@ class FreeplayCategory extends MusicBeatState
 		
 		persistentUpdate = true;
 		funkin.game.PlayState.isStoryMode = false;
+		FlxG.mouse.visible = false;
 		WeekData.reloadWeekFiles(false);
 
 		#if desktop

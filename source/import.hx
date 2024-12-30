@@ -1,4 +1,4 @@
-#if !marco
+#if !macro
 import global.Paths;
 import global.Main;
 import flixel.addons.display.FlxRuntimeShader;

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="MOUSE PH2.png">
+	<!-- Created with Adobe Animate version 19.2.1.408 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Mouse Idle0000" x="0" y="0" width="960" height="540"/>
+	<SubTexture name="Mouse Idle0001" x="0" y="0" width="960" height="540"/>
+	<SubTexture name="Mouse Idle0002" x="960" y="0" width="960" height="540"/>
+	<SubTexture name="Mouse Idle0003" x="960" y="0" width="960" height="540"/>
+	<SubTexture name="Mouse Idle0004" x="1920" y="0" width="960" height="540"/>
+	<SubTexture name="Mouse Idle0005" x="1920" y="0" width="960" height="540"/>
+	<SubTexture name="Mouse Idle0006" x="2880" y="0" width="960" height="540"/>
+	<SubTexture name="Mouse Idle0007" x="2880" y="0" width="960" height="540"/>
+	<SubTexture name="Mouse Idle0008" x="3840" y="0" width="960" height="540"/>
+	<SubTexture name="Mouse Idle0009" x="3840" y="0" width="960" height="540"/>
+	<SubTexture name="Mouse Idle0010" x="3840" y="0" width="960" height="540"/>
+	<SubTexture name="Mouse Idle0011" x="3840" y="0" width="960" height="540"/>
+	<SubTexture name="Mouse Idle0012" x="3840" y="0" width="960" height="540"/>
+	<SubTexture name="Mouse Idle0013" x="3840" y="0" width="960" height="540"/>
+	<SubTexture name="Mouse Sing DOWN0000" x="4800" y="0" width="749" height="999"/>
+	<SubTexture name="Mouse Sing DOWN0001" x="4800" y="0" width="749" height="999"/>
+	<SubTexture name="Mouse Sing DOWN0002" x="5549" y="0" width="749" height="999"/>
+	<SubTexture name="Mouse Sing DOWN0003" x="5549" y="0" width="749" height="999"/>
+	<SubTexture name="Mouse Sing DOWN0004" x="6298" y="0" width="749" height="999"/>
+	<SubTexture name="Mouse Sing DOWN0005" x="6298" y="0" width="749" height="999"/>
+	<SubTexture name="Mouse Sing DOWN0006" x="7047" y="0" width="749" height="999"/>
+	<SubTexture name="Mouse Sing DOWN0007" x="7047" y="0" width="749" height="999"/>
+	<SubTexture name="Mouse Sing DOWN0008" x="7047" y="0" width="749" height="999"/>
+	<SubTexture name="Mouse Sing DOWN0009" x="7047" y="0" width="749" height="999"/>
+	<SubTexture name="Mouse Sing DOWN0010" x="7047" y="0" width="749" height="999"/>
+	<SubTexture name="Mouse Sing DOWN0011" x="7047" y="0" width="749" height="999"/>
+	<SubTexture name="Mouse Sing DOWN0012" x="7047" y="0" width="749" height="999"/>
+	<SubTexture name="Mouse Sing DOWN0013" x="7047" y="0" width="749" height="999"/>
+	<SubTexture name="Mouse Sing LEFT0000" x="0" y="999" width="839" height="1118"/>
+	<SubTexture name="Mouse Sing LEFT0001" x="0" y="999" width="839" height="1118"/>
+	<SubTexture name="Mouse Sing LEFT0002" x="839" y="999" width="839" height="1118"/>
+	<SubTexture name="Mouse Sing LEFT0003" x="839" y="999" width="839" height="1118"/>
+	<SubTexture name="Mouse Sing LEFT0004" x="1678" y="999" width="839" height="1118"/>
+	<SubTexture name="Mouse Sing LEFT0005" x="1678" y="999" width="839" height="1118"/>
+	<SubTexture name="Mouse Sing LEFT0006" x="2517" y="999" width="839" height="1118"/>
+	<SubTexture name="Mouse Sing LEFT0007" x="2517" y="999" width="839" height="1118"/>
+	<SubTexture name="Mouse Sing LEFT0008" x="3356" y="999" width="839" height="1118"/>
+	<SubTexture name="Mouse Sing LEFT0009" x="3356" y="999" width="839" height="1118"/>
+	<SubTexture name="Mouse Sing LEFT0010" x="3356" y="999" width="839" height="1118"/>
+	<SubTexture name="Mouse Sing LEFT0011" x="3356" y="999" width="839" height="1118"/>
+	<SubTexture name="Mouse Sing LEFT0012" x="3356" y="999" width="839" height="1118"/>
+	<SubTexture name="Mouse Sing LEFT0013" x="3356" y="999" width="839" height="1118"/>
+	<SubTexture name="Mouse Sing LEFT0014" x="3356" y="999" width="839" height="1118"/>
+	<SubTexture name="Mouse Sing LEFT0015" x="3356" y="999" width="839" height="1118"/>
+	<SubTexture name="Mouse Sing RIGHT0000" x="4195" y="999" width="943" height="1257"/>
+	<SubTexture name="Mouse Sing RIGHT0001" x="4195" y="999" width="943" height="1257"/>
+	<SubTexture name="Mouse Sing RIGHT0002" x="5138" y="999" width="943" height="1257"/>
+	<SubTexture name="Mouse Sing RIGHT0003" x="5138" y="999" width="943" height="1257"/>
+	<SubTexture name="Mouse Sing RIGHT0004" x="6081" y="999" width="943" height="1257"/>
+	<SubTexture name="Mouse Sing RIGHT0005" x="6081" y="999" width="943" height="1257"/>
+	<SubTexture name="Mouse Sing RIGHT0006" x="7024" y="999" width="943" height="1257"/>
+	<SubTexture name="Mouse Sing RIGHT0007" x="7024" y="999" width="943" height="1257"/>
+	<SubTexture name="Mouse Sing RIGHT0008" x="0" y="2256" width="943" height="1257"/>
+	<SubTexture name="Mouse Sing RIGHT0009" x="0" y="2256" width="943" height="1257"/>
+	<SubTexture name="Mouse Sing RIGHT0010" x="0" y="2256" width="943" height="1257"/>
+	<SubTexture name="Mouse Sing RIGHT0011" x="0" y="2256" width="943" height="1257"/>
+	<SubTexture name="Mouse Sing RIGHT0012" x="0" y="2256" width="943" height="1257"/>
+	<SubTexture name="Mouse Sing RIGHT0013" x="0" y="2256" width="943" height="1257"/>
+	<SubTexture name="Mouse Sing RIGHT0014" x="0" y="2256" width="943" height="1257"/>
+	<SubTexture name="Mouse Sing RIGHT0015" x="0" y="2256" width="943" height="1257"/>
+	<SubTexture name="Mouse Sing UP0000" x="943" y="2256" width="777" height="1035"/>
+	<SubTexture name="Mouse Sing UP0001" x="943" y="2256" width="777" height="1035"/>
+	<SubTexture name="Mouse Sing UP0002" x="1720" y="2256" width="777" height="1035"/>
+	<SubTexture name="Mouse Sing UP0003" x="1720" y="2256" width="777" height="1035"/>
+	<SubTexture name="Mouse Sing UP0004" x="2497" y="2256" width="777" height="1035"/>
+	<SubTexture name="Mouse Sing UP0005" x="2497" y="2256" width="777" height="1035"/>
+	<SubTexture name="Mouse Sing UP0006" x="3274" y="2256" width="777" height="1035"/>
+	<SubTexture name="Mouse Sing UP0007" x="3274" y="2256" width="777" height="1035"/>
+	<SubTexture name="Mouse Sing UP0008" x="3274" y="2256" width="777" height="1035"/>
+	<SubTexture name="Mouse Sing UP0009" x="3274" y="2256" width="777" height="1035"/>
+	<SubTexture name="Mouse Sing UP0010" x="3274" y="2256" width="777" height="1035"/>
+	<SubTexture name="Mouse Sing UP0011" x="3274" y="2256" width="777" height="1035"/>
+	<SubTexture name="Mouse Sing UP0012" x="3274" y="2256" width="777" height="1035"/>
+	<SubTexture name="Mouse attack0000" x="4051" y="2256" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0001" x="4051" y="2256" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0002" x="5101" y="2256" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0003" x="5101" y="2256" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0004" x="6151" y="2256" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0005" x="6151" y="2256" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0006" x="0" y="3513" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0007" x="0" y="3513" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0008" x="1050" y="3513" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0009" x="1050" y="3513" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0010" x="2100" y="3513" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0011" x="2100" y="3513" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0012" x="3150" y="3513" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0013" x="3150" y="3513" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0014" x="4200" y="3513" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0015" x="4200" y="3513" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0016" x="5250" y="3513" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0017" x="5250" y="3513" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0018" x="5250" y="3513" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0019" x="5250" y="3513" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0020" x="5250" y="3513" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0021" x="5250" y="3513" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0022" x="5250" y="3513" width="1050" height="787"/>
+	<SubTexture name="Mouse attack0023" x="5250" y="3513" width="1050" height="787"/>
+</TextureAtlas>
